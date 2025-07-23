@@ -2,6 +2,5 @@ from django.shortcuts import render
 
 def index(request):
     return render (request, 'index.html')
-
-def admins(request):
-    return render (request, 'admins.html')
+def materiais(request):
+    return render (request, 'materiais.html')

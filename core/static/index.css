@@ -1,0 +1,37 @@
+*{
+    font-family: "Open Sans", "Lato", sans-serif;
+}
+
+.tela_com{
+    background-color: #3f131e;
+    margin: 0;
+}
+
+form{
+    background-color: #f1edd0;
+    color: #3f131e;
+    padding: 5%;
+    width: 40%;
+    height: 40%;
+    margin: 0;
+    text-align: center;
+}
+
+h1{
+    text-align: center;
+    font-weight: 900;
+}
+
+input{
+    font-size: 15px;
+    height: 40px;
+    width: 70%;
+    border: 1px solid #3f131e;
+    background-color: aliceblue;
+    border-radius: 5px;
+    margin-top: 0;
+}
+
+.form_dentro{
+    margin-top: 10%;
+}

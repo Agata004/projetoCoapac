@@ -20,7 +20,7 @@ from core.views import index, materiais, emprestimos, itens, estoque
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index, name='index'),
+    #path('', index, name='index'),
     path('materiais/', materiais, name='materiais'),
     path('itens/', itens, name='itens'),
     path('emprestimos/', emprestimos, name='emprestimos'),

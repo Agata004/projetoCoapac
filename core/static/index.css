@@ -2,36 +2,67 @@
     font-family: "Open Sans", "Lato", sans-serif;
 }
 
+html, body{
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
 .tela_com{
     background-color: #3f131e;
+    height: 100%;
     margin: 0;
+    padding: 0;
+}
+
+.tela_com .row{
+    height: 100%;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+img{
+    max-width: 100%;
+    height: auto;
 }
 
 form{
     background-color: #f1edd0;
     color: #3f131e;
-    padding: 5%;
-    width: 40%;
-    height: 40%;
-    margin: 0;
+    padding: 10%;
+    width: 100%;
+    height: 100%;
     text-align: center;
 }
 
-h1{
+form h1{
+    font-size: 50px;
     text-align: center;
-    font-weight: 900;
+    font-weight: bolder;
 }
 
 input{
     font-size: 15px;
-    height: 40px;
+    height: 60px;
     width: 70%;
-    border: 1px solid #3f131e;
+    border: 3px solid #3f131e;
     background-color: aliceblue;
-    border-radius: 5px;
-    margin-top: 0;
+    border-radius: 25px;
+    padding-left: 5%;
+}
+
+.buton{
+    padding: 0;
+    background-color: #3f131e;
+    color: aliceblue;
+    width: 45%;
+    font-size: 20px;
 }
 
 .form_dentro{
-    margin-top: 10%;
+    margin-top: 20%;
 }

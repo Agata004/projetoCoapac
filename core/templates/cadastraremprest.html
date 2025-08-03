@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>COAPAC - Cadastro de Item Perdido</title>
+    <title>COAPAC - Baixa de Emprestimo </title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <script src='main.js'></script>
@@ -14,18 +14,21 @@
     form{
         margin: 0 auto;
         width: 100%;
-        display: block;
+        display: block;  
         align-items: left;
+    }
+    .dono {
+        text-align: center;
+       
+    }
+    .resp {
+        text-align: center;
     }
     body {
         background-color: #6d6d6d93;
         display: flex;
         justify-content: center;
         color: white;
-    }
-    h3.resp {
-        text-align: center;
-        margin-top: 20px;
     }
     .usuario {
         margin-top: 50px;
@@ -45,10 +48,10 @@
         margin-top: 10px;
     }
     .container-fluid {
-        max-width: 600px;
+        max-width: 900px;   
         margin: auto;
     }
-   .row {
+    .row {
         margin-bottom: 10px;
         display: flex;
     }
@@ -66,50 +69,61 @@
         margin: auto;  
         height: 35px;
         font-size: 15px;
+        width: 30%;
     }
 </style>
 <body>
     <div class="usuario container-fluid">
-        <form id="cadastrointemperdForm">
+        <form id="cadastroemprestForm">
             <div class="container-fluid">
                 <div class="row">
+                    <label for="nome">Itens requisitados:</label>
                     <div class="col">
-                        <label for="nome">Nome de quem encontrou:</label>
+                        <input type="text" class="form-control" id="itens-req1" placeholder="Item" required>
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control" id="nome-encontrou" placeholder="Quem encontrou" required>
+                        <input type="number" class="form-control" id="quantidade-req1" placeholder="Quantidade" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <label for="nome">Turma:</label>
+                        <input type="text" class="form-control" id="itens-req2" placeholder="Item" required>
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control" id="turma" placeholder="Turma de quem encontrou" required>
+                        <input type="number" class="form-control" id="quantidade-req2" placeholder="Quantidade" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <label for="nome">Matricula:</label>
+                        <input type="text" class="form-control" id="itens-req3" placeholder="Item" required>
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control" id="matricula" placeholder="Matricula de quem encontrou" required>
+                        <input type="number" class="form-control" id="quantidade-req3" placeholder="Quantidade" required>
                     </div>
                 </div>
+                <h3 class="dono">Requisitante:</h3>
                     <div class="row">
                         <div class="col">
-                            <label for="nome">Local encontrado:</label>
+                            <label for="nome">Nome:</label>
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" id="local" placeholder="Local encontrado" required>
+                            <input type="text" class="form-control" id="nome-req" placeholder="Nome do dono" required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <label for="nome">Descrição do objeto encontrado:</label>
+                            <label for="nome">Turma:</label>
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" id="descricao" placeholder="Descrição do objeto" required>
+                            <input type="text" class="form-control" id="turma" placeholder="Nome do dono" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="nome">Matricula:</label>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" id="matricula" placeholder="Nome do dono" required>
                         </div>
                     </div>
                         <h3 class="resp">Responsável</h3>
@@ -120,10 +134,10 @@
                             <div class="col">
                                 <input type="text" class="form-control" id="nome-bolsista" placeholder="Nome do Bolsista responsável" required>
                             </div>
-                        </div>    
-                           
+                        </div>
+                
             </div>
-            <button type="submit" class="btn btn-primary">Cadastrar item achado</button>
+            <button type="submit" class="btn btn-primary">Cadastrar emprestimo</button>
         </form>
     </div>
 </body>

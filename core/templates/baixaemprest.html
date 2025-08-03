@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>COAPAC - Cadastro de Item Perdido</title>
+    <title>COAPAC - Baixa de Emprestimo </title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <script src='main.js'></script>
@@ -14,8 +14,8 @@
     form{
         margin: 0 auto;
         width: 100%;
-        display: flex;  
-    
+        display: block;  
+        align-items: left;
     }
     .dono {
         text-align: center;
@@ -56,74 +56,98 @@
         display: flex;
     }
     .col {
-        display: flex;   
+        display: flex;
+        align-items: left;
         margin: 0 auto;
     }
-   .btn-primary {
+    .btn-primary {
         color: black;
         background-color: #d1a97e;
         border-color: #000000;
         border-radius: 40px;
         display: block;
         margin: auto;  
-        height: 35px;
+        height: 50px;
         font-size: 15px;
+        width: 20%;
     }
 </style>
 <body>
     <div class="usuario container-fluid">
-        <form id="saidaintemperdForm">
+        <form id="cadastroemprestForm">
             <div class="container-fluid">
                 <div class="row">
+                    <label for="nome">Itens requisitados:</label>
                     <div class="col">
-                        <label for="nome">Descrição do objeto encontrado:</label>
+                        <input type="text" class="form-control" id="itens-req1" placeholder="Item" required>
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control" id="descricao" placeholder="Descrição do objeto" required>
-                    </div>
-                </div>
-                
-                <div class="row">
-                    <div class="col">
-                        <label for="nome">Local encontrado:</label>
+                        <input type="number" class="form-control" id="quantidade-req1" placeholder="Quantidade" required>
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control" id="local" placeholder="Local encontrado" required>
+                        <label for="item1">Entregue?</label>
+                        <input type="checkbox" class="form-check-input" id="item1">
                     </div>
-                </div>
-
-                <div class="row">
-                    <div class="col">
-                        <label for="nome">Quem encontrou:</label>
-                    </div>
-                    <div class="col">
-                        <input type="text" class="form-control" id="nome-encontrou" placeholder="Quem encontrou" required>
+                     <div class="col">
+                        <label for="item1">Acabou?</label>
+                        <input type="checkbox" class="form-check-input" id="item1">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <label for="nome">Turma:</label>
+                        <input type="text" class="form-control" id="itens-req2" placeholder="Item" required>
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control" id="turma" placeholder="Turma de quem encontrou" required>
+                        <input type="number" class="form-control" id="quantidade-req2" placeholder="Quantidade" required>
+                    </div>
+                    <div class="col">
+                        <label for="item2">Entregue?</label>
+                        <input type="checkbox" class="form-check-input" id="item1">
+                    </div>
+                     <div class="col">
+                        <label for="item2">Acabou?</label>
+                        <input type="checkbox" class="form-check-input" id="item1">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <label for="nome">Matricula:</label>
+                        <input type="text" class="form-control" id="itens-req3" placeholder="Item" required>
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control" id="matricula" placeholder="Matricula de quem encontrou" required>
+                        <input type="number" class="form-control" id="quantidade-req3" placeholder="Quantidade" required>
+                    </div>
+                    <div class="col">
+                        <label for="item3">Entregue?</label>
+                        <input type="checkbox" class="form-check-input" id="item1">
+                    </div>
+                     <div class="col">
+                        <label for="item3">Acabou?</label>
+                        <input type="checkbox" class="form-check-input" id="item1">
                     </div>
                 </div>
-                    
-                    <h3 class="dono">Dono(a):</h3>
+                <h3 class="dono">Requisitante:</h3>
                     <div class="row">
                         <div class="col">
                             <label for="nome">Nome:</label>
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" id="nome-dono" placeholder="Nome do dono" required>
+                            <input type="text" class="form-control" id="nome-req" placeholder="Nome do dono" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="nome">Turma:</label>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" id="turma" placeholder="Nome do dono" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="nome">Matricula:</label>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" id="matricula" placeholder="Nome do dono" required>
                         </div>
                     </div>
                         <h3 class="resp">Responsável</h3>
@@ -133,7 +157,9 @@
                             </div>
                             <div class="col">
                                 <input type="text" class="form-control" id="nome-bolsista" placeholder="Nome do Bolsista responsável" required>
-                            </div>     
+                            </div>
+                        </div>
+                
             </div>
             <button type="submit" class="btn btn-primary">Dar baixa</button>
         </form>

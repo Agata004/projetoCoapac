@@ -1,0 +1,133 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% block head %}
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>COAPAC</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href="main.css">
+    <script src='main.js'></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    {% endblock %}
+</head>
+
+<style>
+    body {
+        background-color: #f1edd0;
+    }
+
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    header {
+        width: 100%;
+        background-color: #3f131e;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 12vh;
+    }
+
+    .logo-texto {
+        color: #ffffff;
+    }
+
+    main {
+        height: auto;
+        min-height: 82vh;
+    }
+
+    .conteudo {
+        flex: 1;
+    }
+
+    footer {
+        width: 100%;
+        color: #ffffff;
+    }
+
+    #footer_content {
+        background-color: #3f131e;
+        display: flex;
+
+    }
+
+
+    @media screen and (max-width: 768px) {
+        #footer_content {
+            grid-template-columns: repeat(1, 1fr);
+            gap: 2rem;
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        #footer_content {
+            grid-template-columns: repeat(1, 1fr);
+            padding: 3rem 2rem;
+        }
+    }
+
+    * {
+        font-family: "Open Sans", "Lato", sans-serif;
+    }
+
+    html,
+    body {
+        height: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .tela_com {
+        background-color: #3f131e;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .tela_com .row {
+        height: 100%;
+    }
+</style>
+
+<body>
+    <header>
+        <div class="container-logo">
+            <div class="logo-imagem">
+                <div class="logo-texto">
+                    <h1> COAPAC </h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="conteudo">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div id="footer_content">
+            <div id="footer_contacts">
+                <h1>
+                    Desenvolvedores </h1>
+                <p> Anny Gabriele <br>
+                    Polyanne Alves <br>
+                    Ágata de Oliveira <br>
+                    Felipe Gabriel <br>
+                    Natã Ferreira
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

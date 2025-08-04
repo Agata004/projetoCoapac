@@ -16,19 +16,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from core.views import index, materiais, emprestimos, itens, estoque, dias, salas, reservas, teste, confReser, bases
+from core.views import index, materiais, emprestimos, itensEmpres, estoque, dias, salas, reservas, teste, confReser, base
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
     path('materiais/', materiais, name='materiais'),
-    path('itens/', itens, name='itens'),
+    path('itensEmpres/', itensEmpres, name='itensEmpres'),
     path('emprestimos/', emprestimos, name='emprestimos'),
     path('estoque/', estoque, name='estoque'),
     path('dias/', dias, name='dias'),
     path('salas/', salas, name='salas'),
     path('reservas/', reservas, name='reservas'),
-    path('bases/', bases, name='bases'),
+    path('base/', base, name='base'),
     path('teste/', teste, name='teste'),
     path('confReser/', confReser, name='confReser'),
 ]

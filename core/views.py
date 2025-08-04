@@ -16,3 +16,9 @@ def salas(request):
     return render (request, 'salas.html')
 def reservas(request):
     return render (request, 'reservas.html')
+def confReser(request):
+    return render (request, 'confReser.html')
+
+
+def teste(request):
+    return render (request, 'testedelinks.html')

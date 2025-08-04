@@ -16,3 +16,5 @@ def salas(request):
     return render (request, 'salas.html')
 def reservas(request):
     return render (request, 'reservas.html')
+def bases(request):
+    return render (request, 'bases.html')

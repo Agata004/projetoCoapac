@@ -7,12 +7,12 @@
     <title>COAPAC - Emprestimos</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
+    <script src='{% static "emprest.js" %}' defer></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
 </head>
 <style>
     form{
-        margin: 0 auto;
+        margin-top: 0 auto;
         width: 100%;
         display: block;  
         align-items: left;
@@ -26,7 +26,7 @@
     }
     body {
         background-color: #6d6d6d93;
-        display: flex;
+        display: block;
         justify-content: center;
         color: white;
     }
@@ -71,9 +71,18 @@
         font-size: 15px;
         width: 30%;
     }
+    .cademprest{
+        display: none;
+    }
 </style>
 <body>
-    <div class="usuario container-fluid">
+    <div class="cestinha click">
+        <form action="" method="post" class="cademprestimo">
+            <input type="button" value="cestinha" id="cademp" class="cadas" onclick="cadastroemprest()">
+        </form>
+    </div>
+
+    <div class="usuario container-fluid cademprest">
         <form id="cadastroemprestForm">
             <div class="container-fluid">
                 <div class="row">

@@ -1,0 +1,355 @@
+{% extends "./base.html" %}
+
+{% load static %}
+
+{% block head %}
+    <link rel='stylesheet' type='text/css' media='screen' href='{% static "dias.css" %}'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src='{% static "dias.js" %}' defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+{% endblock %}
+
+{% block content %}
+
+    <div id="toast">Mensagem de teste</div>
+    <div class="corpo container-fluid">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-5 col-xxl-5">
+                <div class="calendario">
+                    <h1>Dias do mês</h1>
+                    <div>
+                        <form id="diasForm" action="" method="post">
+                            <div class="quadro container-fluid">
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="opcoes opcoesmes" for="1">1</label>
+                                        <input class="oculto " type="checkbox" id="1" name="opcoes" value="1">
+                                    </div>
+                                    <div class="col">
+                                        <label class="opcoes opcoesmes" for="2">2</label>
+                                        <input class="oculto " type="checkbox" id="2" name="opcoes" value="2">
+                                    </div>
+                                    <div class="col">
+                                        <label class="opcoes opcoesmes" for="3">3</label>
+                                        <input class="oculto " type="checkbox" id="3" name="opcoes" value="3">
+                                    </div>
+                                    <div class="col">
+                                        <label class="opcoes opcoesmes" for="4">4</label>
+                                        <input class="oculto " type="checkbox" id="4" name="opcoes" value="4">
+                                    </div>
+                                    <div class="col">
+                                        <label class="opcoes opcoesmes" for="5">5</label>
+                                        <input class="oculto " type="checkbox" id="5" name="opcoes" value="5">
+                                    </div>
+                                    <div class="col">
+                                        <label class="opcoes opcoesmes" for="6">6</label>
+                                        <input class="oculto " type="checkbox" id="6" name="opcoes" value="6">
+                                    </div>
+                                    <div class="col">
+                                        <label class="opcoes opcoesmes" for="7">7</label>
+                                        <input class="oculto " type="checkbox" id="7" name="opcoes" value="7">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="opcoes opcoesmes" for="8">8</label>
+                                        <input class="oculto " type="checkbox" id="8" name="opcoes" value="8">
+                                    </div>
+                                    <div class="col">
+                                        <label class="opcoes opcoesmes" for="9">9</label>
+                                        <input class="oculto " type="checkbox" id="9" name="opcoes" value="9">
+                                    </div>
+                                    <div class="col">
+                                        <label class="opcoes opcoesmes" for="10">10</label>
+                                        <input class="oculto " type="checkbox" id="10" name="opcoes" value="10">
+                                    </div>
+                                    <div class="col">
+                                        <label class="opcoes opcoesmes" for="11">11</label>
+                                        <input class="oculto " type="checkbox" id="11" name="opcoes" value="11">
+                                    </div>
+                                    <div class="col">
+                                        <label class="opcoes opcoesmes" for="12">12</label>
+                                        <input class="oculto " type="checkbox" id="12" name="opcoes" value="12">
+                                    </div>
+                                    <div class="col">
+                                        <label class="opcoes opcoesmes" for="13">13</label>
+                                        <input class="oculto " type="checkbox" id="13" name="opcoes" value="13">
+                                    </div>
+                                    <div class="col">
+                                        <label class="opcoes opcoesmes" for="14">14</label>
+                                        <input class="oculto " type="checkbox" id="14" name="opcoes" value="14">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="opcoes opcoesmes" for="15">15</label>
+                                        <input class="oculto " type="checkbox" id="15" name="opcoes" value="15">
+                                    </div>
+                                    <div class="col">
+                                        <label class="opcoes opcoesmes" for="16">16</label>
+                                        <input class="oculto " type="checkbox" id="16" name="opcoes" value="16">
+                                    </div>
+                                    <div class="col">
+                                        <label class="opcoes opcoesmes" for="17">17</label>
+                                        <input class="oculto " type="checkbox" id="17" name="opcoes" value="17">
+                                    </div>
+                                    <div class="col">
+                                        <label class="opcoes opcoesmes" for="18">18</label>
+                                        <input class="oculto " type="checkbox" id="18" name="opcoes" value="18">
+                                    </div>
+                                    <div class="col">
+                                        <label class="opcoes opcoesmes" for="19">19</label>
+                                        <input class="oculto " type="checkbox" id="19" name="opcoes" value="19">
+                                    </div>
+                                    <div class="col">
+                                        <label class="opcoes opcoesmes" for="20">20</label>
+                                        <input class="oculto " type="checkbox" id="20" name="opcoes" value="20">
+                                    </div>
+                                    <div class="col">
+                                        <label class="opcoes opcoesmes" for="21">21</label>
+                                        <input class="oculto " type="checkbox" id="21" name="opcoes" value="21">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="opcoes opcoesmes" for="22">22</label>
+                                        <input class="oculto " type="checkbox" id="22" name="opcoes" value="22">
+                                    </div>
+                                    <div class="col">
+                                        <label class="opcoes opcoesmes" for="23">23</label>
+                                        <input class="oculto " type="checkbox" id="23" name="opcoes" value="23">
+                                    </div>
+                                    <div class="col">
+                                        <label class="opcoes opcoesmes" for="24">24</label>
+                                        <input class="oculto " type="checkbox" id="24" name="opcoes" value="24">
+                                    </div>
+                                    <div class="col">
+                                        <label class="opcoes opcoesmes" for="25">25</label>
+                                        <input class="oculto " type="checkbox" id="25" name="opcoes" value="25">
+                                    </div>
+                                    <div class="col">
+                                        <label class="opcoes opcoesmes" for="26">26</label>
+                                        <input class="oculto " type="checkbox" id="26" name="opcoes" value="26">
+                                    </div>
+                                    <div class="col">
+                                        <label class="opcoes opcoesmes" for="27">27</label>
+                                        <input class="oculto " type="checkbox" id="27" name="opcoes" value="27">
+                                    </div>
+                                    <div class="col">
+                                        <label class="opcoes opcoesmes" for="28">28</label>
+                                        <input class="oculto " type="checkbox" id="28" name="opcoes" value="28">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="opcoes opcoesmes" for="29">29</label>
+                                        <input class="oculto " type="checkbox" id="29" name="opcoes" value="29">
+                                    </div>
+                                    <div class="col">
+                                        <label class="opcoes opcoesmes" for="30">30</label>
+                                        <input class="oculto " type="checkbox" id="30" name="opcoes" value="30">
+                                    </div>
+                                    <div class="col">
+                                        <label class="opcoes opcoesmes" for="31">31</label>
+                                        <input class="oculto " type="checkbox" id="31" name="opcoes" value="31">
+                                    </div>
+                                    <div class="col"></div>
+                                    <div class="col"></div>
+                                    <div class="col"></div>
+                                    <div class="col"></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+                <div class="ano">
+                    <h1>Meses do ano</h1>
+                    <div class="quadro">
+                        <form id="mesesForm" action="" method="post">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <label class="opcoes opcoesano" for="Janeiro">Janeiro</label>
+                                        <input class="oculto" type="checkbox" id="Janeiro" name="meses" value="Janeiro">
+                                    </div>
+                                    <div class="col-3">
+                                        <label class="opcoes opcoesano" for="Fevereiro">Fevereiro</label>
+                                        <input class="oculto" type="checkbox" id="Fevereiro" name="meses"
+                                            value="Fevereiro">
+                                    </div>
+                                    <div class="col-3">
+                                        <label class="opcoes opcoesano" for="Março">Março</label>
+                                        <input class="oculto" type="checkbox" id="Março" name="meses" value="Março">
+                                    </div>
+                                    <div class="col-3">
+                                        <label class="opcoes opcoesano" for="Abril">Abril</label>
+                                        <input class="oculto" type="checkbox" id="Abril" name="meses" value="Abril">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-3">
+                                        <label class="opcoes opcoesano" for="Maio">Maio</label>
+                                        <input class="oculto" type="checkbox" id="Maio" name="meses" value="Maio">
+                                    </div>
+                                    <div class="col-3">
+                                        <label class="opcoes opcoesano" for="Junho">Junho</label>
+                                        <input class="oculto" type="checkbox" id="Junho" name="meses" value="Junho">
+                                    </div>
+                                    <div class="col-3">
+                                        <label class="opcoes opcoesano" for="Julho">Julho</label>
+                                        <input class="oculto" type="checkbox" id="Julho" name="meses" value="Julho">
+                                    </div>
+                                    <div class="col-3">
+                                        <label class="opcoes opcoesano" for="Agosto">Agosto</label>
+                                        <input class="oculto" type="checkbox" id="Agosto" name="meses" value="Agosto">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-3">
+                                        <label class="opcoes opcoesano" for="Setembro">Setembro</label>
+                                        <input class="oculto" type="checkbox" id="Setembro" name="meses"
+                                            value="Setembro">
+                                    </div>
+                                    <div class="col-3">
+                                        <label class="opcoes opcoesano" for="Outubro">Outubro</label>
+                                        <input class="oculto" type="checkbox" id="Outubro" name="meses" value="Outubro">
+                                    </div>
+                                    <div class="col-3">
+                                        <label class="opcoes opcoesano" for="Novembro">Novembro</label>
+                                        <input class="oculto" type="checkbox" id="Novembro" name="meses"
+                                            value="Novembro">
+                                    </div>
+                                    <div class="col-3">
+                                        <label class="opcoes opcoesano" for="Dezembro">Dezembro</label>
+                                        <input class="oculto" type="checkbox" id="Dezembro" name="meses"
+                                            value="Dezembro">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-7 col-xxl-7">
+                <div class="semana">
+                    <h1>Dias da semana</h1>
+                    <div class="quadro">
+                        <form id="semanForm" action="" method="post">
+                            <div class="container-fluid">
+                                <div class="d-flex flex-wrap">
+                                    <div class="flex-fill">
+                                        <label class="opcoes opcoessemana" for="domingo">Domingo</label>
+                                        <input class="oculto" type="checkbox" id="domingo" name="dias_semana"
+                                            value="domingo">
+                                    </div>
+                                    <div class="flex-fill">
+                                        <label class="opcoes opcoessemana" for="segunda">Segunda</label>
+                                        <input class="oculto" type="checkbox" id="segunda" name="dias_semana"
+                                            value="segunda">
+                                    </div>
+                                    <div class="flex-fill">
+                                        <label class="opcoes opcoessemana" for="terca">Terça</label>
+                                        <input class="oculto" type="checkbox" id="terca" name="dias_semana"
+                                            value="terca">
+                                    </div>
+                                    <div class="flex-fill">
+                                        <label class="opcoes opcoessemana" for="quarta">Quarta</label>
+                                        <input class="oculto" type="checkbox" id="quarta" name="dias_semana"
+                                            value="quarta">
+                                    </div>
+                                    <div class="flex-fill">
+                                        <label class="opcoes opcoessemana" for="quinta">Quinta</label>
+                                        <input class="oculto" type="checkbox" id="quinta" name="dias_semana"
+                                            value="quinta">
+                                    </div>
+                                    <div class="flex-fill">
+                                        <label class="opcoes opcoessemana" for="sexta">Sexta</label>
+                                        <input class="oculto" type="checkbox" id="sexta" name="dias_semana"
+                                            value="sexta">
+                                    </div>
+                                    <div class="flex-fill">
+                                        <label class="opcoes opcoessemana" for="sabado">Sábado</label>
+                                        <input class="oculto" type="checkbox" id="sabado" name="dias_semana"
+                                            value="sabado">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+                <div class="horario">
+                    <h1>Horários do dia</h1>
+                    <div class="quadro">
+                        <form id="horariosForm" action="" method="post">
+                            <div class="container-fluid">
+                                <div>
+                                    <p>Manhã</p>
+                                    <div class="row">
+                                        <div style="padding: 0%;"
+                                            class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                            <label class="opcoes opcoeshorario" for="07:00 - 08:30">07:00 - 08:30</label>
+                                            <input class="oculto" type="checkbox" id="07:00 - 08:30" name="horarios" value="07:00 - 08:30">
+                                        </div>
+                                        <div style="padding: 0%;"
+                                            class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                            <label class="opcoes opcoeshorario" for="08:50 - 10:20">08:50 - 10:20</label>
+                                            <input class="oculto" type="checkbox" id="08:50 - 10:20" name="horarios" value="08:50 - 10:20">
+                                        </div>
+                                        <div style="padding: 0%;"
+                                            class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                            <label class="opcoes opcoeshorario" for="10:30 - 12:00">10:30 - 12:00</label>
+                                            <input class="oculto" type="checkbox" id="10:30 - 12:00" name="horarios" value="10:30 - 12:00">
+                                        </div>
+                                    </div>
+                                </div> <br>
+                                <div>
+                                    <p>Tarde</p>
+                                    <div class="row">
+                                        <div style="padding: 0%;"
+                                            class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                            <label class="opcoes opcoeshorario" for="13:00 - 14:30">13:00 - 14:30</label>
+                                            <input class="oculto" type="checkbox" id="13:00 - 14:30" name="horarios" value="13:00 - 14:30">
+                                        </div>
+                                        <div style="padding: 0%;"
+                                            class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                            <label class="opcoes opcoeshorario" for="14:50 - 16:20">14:50 - 16:20</label>
+                                            <input class="oculto" type="checkbox" id="14:50 - 16:20" name="horarios" value="14:50 - 16:20">
+                                        </div>
+                                        <div style="padding: 0%;"
+                                            class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                            <label class="opcoes opcoeshorario" for="16:30 - 18:00">16:30 - 18:00</label>
+                                            <input class="oculto" type="checkbox" id="16:30 - 18:00" name="horarios" value="16:30 - 18:00">
+                                        </div>
+                                    </div>
+                                </div> <br>
+                                <div>
+                                    <p>Noite</p>
+                                    <div class="row">
+                                        <div style="padding: 0%;"
+                                            class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                            <label class="opcoes opcoeshorario" for="19:00 - 20:30">19:00 - 20:30</label>
+                                            <input class="oculto" type="checkbox" id="19:00 - 20:30" name="horarios" value="19:00 - 20:30">
+                                        </div>
+                                        <div style="padding: 0%;"
+                                            class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                            <label class="opcoes opcoeshorario" for="20:40 - 22:10">20:40 - 22:10</label>
+                                            <input class="oculto" type="checkbox" id="20:40 - 22:10" name="horarios" value="20:40 - 22:10">
+                                        </div>
+                                        <div class="col"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button id="enviarTudo" class="envia btn btn-primary mt-4">Enviar Tudo</button>
+    </div>
+
+{% endblock %}

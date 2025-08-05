@@ -1,0 +1,69 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block head %}
+    <title>COAPAC - Salas disponíveis</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='{% static "salas.css" %}'>
+    <script src='{% static "salas.js" %}' defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+{% endblock %}
+
+{% block content %}
+    <div class="conf container-fluid">
+        <h2 class="text-center">Confirmação de reserva de salas</h2>
+        <form action="" method="post"> <br>
+            <div class="row">
+                <div class="col">
+                    <label for="sala">Sala escolhida:</label>
+                </div>
+                <div class="col">
+                    <input type="number" id="sala" name="sala" class="form-control" required>
+                </div>
+            </div> <br>
+
+            <div class="row">
+                <div class="col">
+                    <label for="motivo">Motivo:</label>
+                </div>
+                <div class="col">
+                    <input type="text" id="motivo" name="motivo" class="form-control" required>
+                </div>
+            </div> <br>
+
+            <div class="row">
+                <div class="col">
+                    <label for="data">Data da reserva:</label>
+                </div>
+                <div class="col">
+                    <input type="date" id="data" name="data" class="form-control" required>
+                </div>
+            </div> <br>
+
+            <div class="row">
+                <div class="col">
+                    <label for="hora">Hora de início:</label>
+                </div>
+                <div class="col">
+                    <input type="time" id="hora" name="hora" class="form-control" required>
+                </div>
+            </div> <br>
+
+            <div class="row">
+                <div class="col">
+                    <label for="hora_fim">Hora de término:</label>
+                </div>
+                <div class="col">
+                    <input type="time" id="hora_fim" name="hora_fim" class="form-control" required>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="texto container-fluid">
+        <h1 class="text-center">Reserva de Salas</h1>
+        <p class="text-center">Preencha os campos abaixo para reservar uma sala.</p>
+        <button class="btn btn-primary" onclick="mostrarConfirmacao()">Reservar Sala</button>
+    </div>
+{% endblock %}

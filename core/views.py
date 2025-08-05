@@ -25,5 +25,8 @@ def reservas(request):
     return render (request, 'reservas.html')
 def salas(request):
     return render (request, 'salas.html')
+def usuarios(request):
+    return render (request, 'usuarios.html')
+
 def teste(request):
     return render (request, 'testedelinks.html')

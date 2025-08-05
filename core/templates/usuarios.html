@@ -6,54 +6,64 @@
     <title>Coapac - Usuários</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='{% static "usuario.css" %}'>
-    <script src='{% static "confReser.js" %}'></script>
+    <script src='{% static "usuario.js" %}' defer></script>
+    <script src="https://kit.fontawesome.com/14d5cbfc5d.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
 {% endblock %}
 
 {% block content %}
 
-    <div>
-        <div>
-            <button id="botadduser" class="botadduser" onclick="aparecerConfirmacao()">Adicionar usuário</button>
+    <div class="container-fluid tudo">
+        <div class="botaoeform">
+            <div>
+                <button id="botadduser" class="botadduser" onclick="aparecerConfirmacao()">Adicionar usuário</button>
+            </div>
+
+            <div class="container-fluid fom esconderform1">
+                <form action="" method="post" class="formcadastro">
+                    {% csrf_token %}
+                    <h1>Cadastro de novo usuário</h1>
+                    <div class="row">
+                        <div class="labeinput">
+                            <label for="">Usuário: </label> 
+                            <input type="text" id="usuario" name="usuario" placeholder="Nome do usuário">
+                        </div>
+                        <div class="labeinput">
+                            <label for="">Senha:</label>
+                            <input type="password" id="senha" name="senha" placeholder="Senha do usuário">
+                        </div>
+                        <div class="divbotaddform">
+                            <input type="button" value="Adicionar" id="botaddform" class="botaddform">
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
 
-        <div>TABELA DE USUÁRIOS</div>
+        <div class="tabelaeform">
+            <div>
+                TABELA DE USUÁRIOS
+                <button id="botadduser" class="botadduser" onclick="aparecerFormdesenha()">Trocar senha</button>
+            </div>
 
-        <div class="container-fluid">
-            <form action="" method="post" class="formcadastro">
-                {% csrf_token %}
-                <h1>Cadastro de novo usuário</h1>
-                <div class="row">
-                    <div class="">
-                        <label for="">Usuário: </label> 
-                        <input type="text" id="usuario" name="usuario" placeholder="Nome do usuário">
+            <div class="container-fluid fom esconderform2">
+                <form action="" method="post" class="formtrocase">
+                    {% csrf_token %}
+                    <h1>Digite a nova senha:</h1>
+                    <div class="row">
+                        <div class="labeinput">
+                            <label for="">
+                                <i class="fa-solid fa-lock fa-3x" style="color: #3f131e;"></i>
+                            </label>
+                            <input type="password" id="novasenha" name="novasenha" placeholder="Nova senha"> 
+                        </div>
+                        <div class= "">
+                            <button id="bottrocase" class="bottrocase">Alterar</button>
+                        </div>
                     </div>
-                    <div class="">
-                        <label for="">Senha:</label>
-                        <input type="password" id="senha" name="senha" placeholder="Senha do usuário">
-                    </div>
-                    <div class="">
-                        <input type="button" value="Adicionar" id="botaddform" class="botaddform">
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <div class="container-fluid fom esconderform">
-            <form action="" method="post" class="formtrocase">
-                {% csrf_token %}
-                <h1>Digite a nova senha:</h1>
-                <div class="row">
-                    <div class="">
-                        <label for="">Ícone de cadeado</label>
-                        <input type="password" id="novasenha" name="novasenha" placeholder="Nova senha"> 
-                    </div>
-                    <div class= "">
-                        <button id="bottrocase" class="bottrocase">Confirmar</button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 {% endblock %}

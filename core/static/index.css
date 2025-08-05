@@ -1,36 +1,79 @@
-*{
+* {
     font-family: "Open Sans", "Lato", sans-serif;
 }
 
-html, body{
+html,
+body {
     height: 100%;
     padding: 0;
-    margin: 0;  
+    margin: 0;
 }
 
-.tela_com{
+.tela_com {
     background-color: #3f131e;
     height: 100%;
     margin: 0;
     padding: 0;
 }
 
-.tela_com .row{
+#toast {
+    visibility: hidden;
+    min-width: 250px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    top: 30px;
+    transform: translateX(-50%);
+}
+
+
+#toast.show {
+    visibility: visible;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+
+.tela_com .row {
     height: 100%;
 }
 
-.logo{
+.logo {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-img{
+img {
     max-width: 100%;
     height: auto;
 }
 
-form{
+form {
     background-color: #f1edd0;
     color: #3f131e;
     padding: 10%;
@@ -39,17 +82,17 @@ form{
     text-align: center;
 }
 
-form h1{
+form h1 {
     font-size: 50px;
     text-align: center;
     font-weight: bolder;
 }
 
-i{
+i {
     margin-right: 5%;
 }
 
-input{
+input {
     font-size: 15px;
     height: 60px;
     width: 70%;
@@ -59,7 +102,7 @@ input{
     padding-left: 5%;
 }
 
-.buton{
+.buton {
     padding: 0;
     background-color: #3f131e;
     color: aliceblue;
@@ -67,16 +110,18 @@ input{
     font-size: 20px;
 }
 
-.form_dentro{
+.form_dentro {
     margin-top: 20%;
 }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
-    margin: 0; /* <-- Aparentemente, algumas margens ainda estão lá, apesar de estar ocultas */
+    margin: 0;
+    /* <-- Aparentemente, algumas margens ainda estão lá, apesar de estar ocultas */
 }
 
 input[type=number] {
-    -moz-appearance:textfield; /* Firefox */
-    }
+    -moz-appearance: textfield;
+    /* Firefox */
+}

@@ -27,6 +27,12 @@ def salas(request):
     return render (request, 'salas.html')
 def usuarios(request):
     return render (request, 'usuarios.html')
-
 def teste(request):
     return render (request, 'testedelinks.html')
+def impressões(request):
+    return render (request, 'impressões.html')
+def controle(request):
+    return render (request, 'controle.html')
+
+
+

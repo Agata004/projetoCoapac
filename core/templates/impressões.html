@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="contador">
+    <label for="contagem">Contabilização das impressões:</label>
+    <input type="number" id="contagem" value="8562">
+    <button id="resetar">Resetar</button>
+</div>
+<div class="form-container">
+
+    <div class="linha">
+        <div class="campo">
+            <label for="requisitante">Requisitante:</label>
+            <input type="text" id="requisitante">
+        </div>
+
+        <div class="campo">
+            <label for="quantidade">Quantidade:</label>
+            <input type="number" id="quantidade">
+        </div>
+    </div>
+
+    <div class="linha">
+        <div class="campo">
+            <label for="responsavel">Responsável:</label>
+            <select id="responsavel">
+                <option value="">Selecione</option>
+                <option value="João">João</option>
+                <option value="Maria">Maria</option>
+                <option value="José">José</option>
+            </select>
+        </div>
+
+        <div class="campo">
+            <label for="data">Data:</label>
+            <input type="date" id="data">
+        </div>
+    </div>
+
+    <button class="btn-salvar">Salvar</button>
+</div>
+</body>
+</html>

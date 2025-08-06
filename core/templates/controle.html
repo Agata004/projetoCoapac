@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>COAPAC - Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            background-color: #f5f5dc; /* Bege claro */
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .menu-container {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .menu-column {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .menu-button {
+            width: 200px;
+            height: 100px;
+            font-size: 18px;
+            background-color: #000; /* Preto */
+            color: #fff; /* Branco */
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .menu-button:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>COAPAC</h1>
+
+    <div class="menu-container">
+        <div class="menu-column">
+            <button class="menu-button" onclick="location.href='materiais.html'">Materiais</button>
+            <button class="menu-button" onclick="location.href='achados_perdidos.html'">Achados e Perdidos</button>
+        </div>
+        <div class="menu-column">
+            <button class="menu-button" onclick="location.href='controle_chaves.html'">Controle de Chaves</button>
+            <button class="menu-button" onclick="location.href='impressoes.html'">Impressões</button>
+        </div>
+    </div>
+
+</body>
+</html>

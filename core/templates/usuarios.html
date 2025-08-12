@@ -14,13 +14,13 @@
 
 {% block content %}
 
-    <div class="container-fluid tudo">
-        <div class="botaoeform">
-            <div>
+    <div class="container-fluid">
+        <div class="row botaoeform">
+            <div class="col-8 col-sm-8 col-md-3 col-lg-3 col-xl-2 col-xxl-2">
                 <button id="botadduser" class="botadduser" onclick="aparecerConfirmacao()">Adicionar usuário</button>
             </div>
 
-            <div class="container-fluid fom esconderform1">
+            <div class="container-fluid formm esconderform1">
                 <form action="" method="post" class="formcadastro">
                     {% csrf_token %}
                     <h1>Cadastro de novo usuário</h1>
@@ -41,28 +41,32 @@
             </div>
         </div>
 
-        <div class="tabelaeform">
+        <div class="container-fluid tabelaeform">
             <div>
-                TABELA DE USUÁRIOS
-                <button id="botadduser" class="botadduser" onclick="aparecerFormdesenha()">Trocar senha</button>
+                TABELA DE USUÁRIOS <br>
+                <button id="botadduser" class="botadduser" onclick="aparecerFormdesenha()">Trocar senha</button> <!-- Classe do CSS temporária. Apenas para a visualização do formulário -->
             </div>
 
-            <div class="container-fluid fom esconderform2">
-                <form action="" method="post" class="formtrocase">
-                    {% csrf_token %}
-                    <h1>Digite a nova senha:</h1>
-                    <div class="row">
-                        <div class="labeinput">
-                            <label for="">
-                                <i class="fa-solid fa-lock fa-3x" style="color: #3f131e;"></i>
-                            </label>
-                            <input type="password" id="novasenha" name="novasenha" placeholder="Nova senha"> 
-                        </div>
-                        <div class= "">
-                            <button id="bottrocase" class="bottrocase">Alterar</button>
-                        </div>
+            <div class="container-fluid formm esconderform2">
+                <div class="row">
+                    <div class="col-8 col-sm-10 col-md-10 col-lg-10 col-xl-6 col-xxl-6 p-0 m-0" style="width: 100%;">
+                        <form action="" method="post" class="formtrocase">
+                            {% csrf_token %}
+                            <h1>Digite a nova senha:</h1>
+                            <div>
+                                <div class="labeinput">
+                                    <label for="">
+                                        <i class="fa-solid fa-lock fa-3x" style="color: #3f131e;"></i>
+                                    </label>
+                                    <input type="password" id="novasenha" name="novasenha" placeholder="Nova senha"> 
+                                </div>
+                                <div class= "">
+                                    <button id="bottrocase" class="bottrocase">Alterar</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>

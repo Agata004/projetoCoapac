@@ -6,7 +6,6 @@
     border: none;
     border-radius: 15px;
     padding: 10px;
-    cursor: pointer;
     font-size: 16px;
     font-weight: bold;
     width: 100%;
@@ -70,14 +69,14 @@ form > h1 {
     text-align: center;
     font-size: 30px;
     font-weight: bold;
-    margin-bottom: 25px;
+    margin-bottom: 40px;
 }
 
 label{
-    margin-top: 5%;
-    font-size: 18px;
-    width: 50%;
+    font-size: 20px;
+    width: auto;
     text-align: center;
+    font-weight: bold;
     margin-right: 5%;
 }
 
@@ -95,10 +94,9 @@ input{
 
 .labeinput {
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-items: center;
     margin: 10px 0;
-    width: 80%;
 }
 
 .botaddform {

@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Usuario
 
 # Ordenar alfabeticamente para encontrar mais fácil
 def AeP(request):
@@ -25,6 +26,15 @@ def reservas(request):
     return render (request, 'reservas.html')
 def salas(request):
     return render (request, 'salas.html')
+def usuario(request):
+    novo_usuario = Usuario()
+    novo_usuario.credencial = request.POST.get('credencial')
+    novo_usuario.senha = request.POST.get('senha')
+    novo_usuario.save()
+    usuarios = {
+        'usuarios': Usuario.objects.all()
+    }
+    return render (request, 'usuario.html', usuarios)
 def usuarios(request):
     return render (request, 'usuarios.html')
 def teste(request):

@@ -33,6 +33,8 @@ def impressões(request):
     return render (request, 'impressões.html')
 def controle(request):
     return render (request, 'controle.html')
+def base(request):
+    return render(request, 'base.html')
 
 
 

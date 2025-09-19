@@ -45,6 +45,8 @@ def controle(request):
     return render (request, 'controle.html')
 def base(request):
     return render(request, 'base.html')
+def icones(request):
+    return render(request, 'icones.html')
 
 
 

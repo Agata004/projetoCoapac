@@ -15,26 +15,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from core.views import index, materiais, emprestimos, itensEmpres, estoque, dias, salas, reservas, confReser, base, usuario, usuarios, teste, inicio, impressões, controle, icones
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index, name='index'),
-    path('materiais/', materiais, name='materiais'),
-    path('itensEmpres/', itensEmpres, name='itensEmpres'),
-    path('emprestimos/', emprestimos, name='emprestimos'),
-    path('estoque/', estoque, name='estoque'),
-    path('inicio/', inicio, name='inicio'),
-    path('dias/', dias, name='dias'),
-    path('salas/', salas, name='salas'),
-    path('reservas/', reservas, name='reservas'),
-    path('base/', base, name='base'),
-    path('confReser/', confReser, name='confReser'),
-    path('usuario/', usuario, name='usuario'),
-    path('usuarios/', usuarios, name='usuarios'),
-    path('teste/', teste, name='teste'),
-    path('impressões/', impressões, name='impressões'),
-    path('controle/', controle, name='controle'),
-     path('icones/', icones, name='icones'),
+    path('', include('core.urls')),
 ]

@@ -9,7 +9,38 @@
 
             </div>
             <div class="col-10">
-                <h2>Lista de Itens</h2>
+                <h2>Lista de Itens Devolutivos</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nome do Item</th>
+                            <th>Quantidade</th>
+                            <th>Descrição</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in itens %}
+                        <tr>
+                            <td>{{ item.nome_item }}</td>
+                            <td>{{ item.quantidade }}</td>
+                            <td>{{ item.descricao }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-1">
+
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-1">
+
+            </div>
+            <div class="col-10">
+                <h2>Lista de Itens Não Devolutivos</h2>
                 <table class="table table-striped">
                     <thead>
                         <tr>

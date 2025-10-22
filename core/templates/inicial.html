@@ -6,7 +6,10 @@
 <div class="container-fluid">
     <div class="row">
         <div style="text-align: center;" class="col-12 col-sm-2 col-md-2 col-lg-1">
-            
+            <div><a href="{% url 'emprestimo' %}" class="botao">Cadastrar empréstimo</a></div>
+            <div><a href="{% url 'itensCadastroDevolutivos' %}" class="botao">Cadastrar itens devolutivos</a></div>
+            <div><a href="{% url 'itensCadastroNaoDevolutivos' %}" class="botao">Cadastrar itens não devolutivos</a></div>
+            <div><a href="{% url 'itensVisualizacao' %}" class="botao">Visualizar listas de itens</a></div>
         </div>
         <div style="padding: 0 30px; text-align: center;" class="col-12 col-sm-8 col-md-8 col-lg-10">
             <h2>Lista de empréstimos</h2>
@@ -21,15 +24,23 @@
                         <th>Matrícula</th>
                         <th>Vínculo</th>
                         <th>Turma ou disciplina</th>
+                        <th>Entregue</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for usuario in usuarios %}
                     <tr>
-                        <td>{{ usuario.credencial }}</td>
-                        <td>{{ usuario.nome }}</td>
+                        <td>{{ item.nome }}</td>
+                        <td>{{ usuario.data_saida }}</td>
+                        <td>{{ usuario.data_entrega }}</td>
+                        <td>{{ usuario.responsavel }}</td>
+                        <td>{{ usuario.requerente }}</td>
+                        <td>{{ usuario.matricula }}</td>
+                        <td>{{ usuario.vinculo }}</td>
+                        <td>{{ usuario.turma_disciplina }}</td>
+                        <td>{{ usuario.entregue }}</td>
                         <td><a href="{% url 'usuarioEditar' usuario.id %}" class="btn btn-warning">Editar</a></td>
-                        <td><a href="{% url 'usuarioExcluir' usuario.id %}" class="btn btn-danger">Dar baixa</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>

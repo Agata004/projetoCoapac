@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Itens Devolutivos{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-4">
+
+            </div>
+            <div class="col-4">
+                <form method="post">
+                    {% csrf_token %}
+                    <h2>Cadastro de Itens Não Devolutivos</h2>
+                    <div class="mb-3">
+                        <label for="nome_item" class="form-label">Nome do Item</label>
+                        <input type="text" class="form-control" id="nome_item" name="nome_item" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Cadastrar Item</button>
+                </form>
+            <div class="col-4">
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

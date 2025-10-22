@@ -1,37 +1,33 @@
 from django.db import models
 
-
 class ComunidadeEscolar(models.Model):
-    matricula = models.IntegerField(max_length=14, primary_key=True)
-    nome = models.CharField(max_length=100)
-    vinculo = models.CharField(max_length=50)
-    turmaouDisciplina = models.CharField(max_length=50)
+    matricula = models.IntegerField('Matrícula', max_length=14, primary_key=True)
+    nome = models.CharField('Nome', max_length=100)
+    vinculo = models.CharField('Vínculo', max_length=50)
+    turmaouDisciplina = models.CharField('Turma ou Disciplina', max_length=50)
 
 class Usuarios(models.Model):
-    credencial = models.IntegerField(max_length=4, primary_key=True)
-    nome = models.CharField(max_length=100)
-    senha = models.CharField(max_length=6)
+    credencial = models.IntegerField('Credencial', max_length=4, primary_key=True)
+    nome = models.CharField('Usuário', max_length=100)
+    senha = models.CharField('Senha', max_length=6)
 
 class Emprestimo(models.Model):
-    idEmprestimo = models.AutoField(primary_key=True)
-    dataSaida = models.DateField()
-    dataDevolucao = models.DateField()
+    idEmprestimo = models.AutoField('Empréstimo', primary_key=True)
+    dataSaida = models.DateField('Data de Saída')
+    dataDevolucao = models.DateField('Data de Devolução')
     comunidadeEscolar = models.ManyToManyField(ComunidadeEscolar)
     usuarios = models.ManyToManyField(Usuarios)
 
 class TipoProduto(models.Model):
-    idTipoProduto = models.AutoField(primary_key=True)
-    nome = models.CharField(max_length=100)
+    nome = models.CharField('Tipo do Produto', max_length=100)
 
 class Produtos(models.Model):
-    idProduto = models.AutoField(primary_key=True)
-    nome = models.CharField(max_length=100)
-    idTipoProduto = models.ForeignKey(TipoProduto, on_delete=models.PROTECT)
-    idEmprestimo = models.ForeignKey(Emprestimo, on_delete=models.PROTECT)
+    nome = models.CharField('Produto', max_length=100)
+    TipoProduto = models.ForeignKey(TipoProduto, on_delete=models.PROTECT)
+    Emprestimo = models.ForeignKey(Emprestimo, on_delete=models.PROTECT)
 
 class Entrega(models.Model):
-    idEntrega = models.AutoField(primary_key=True)
-    dataSaida = models.DateField()
-    quantidade = models.IntegerField()
+    dataSaida = models.DateField('Data de Saída')
+    quantidade = models.IntegerField('Quantidade')
     usuario = models.ManyToManyField(Usuarios)
     produto = models.ManyToManyField(Produtos)

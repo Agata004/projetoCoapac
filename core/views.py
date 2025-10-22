@@ -10,9 +10,9 @@ def emprestimos(request):
 def inicial(request):
     return render(request, 'inicial.html')
 def itensCadastroDevolutivos(request):
-    return render(request, 'itens_cadastroDevolutivos.html')
+    return render(request, 'itensCadastroDevolutivos.html')
 def itensCadastroNaoDevolutivos(request):
-    return render(request, 'itens_cadastroNaoDevolutivos.html')
+    return render(request, 'itensCadastroNaoDevolutivos.html')
 def itensVisualizacao(request):
     return render(request, 'itensVisualizacao.html')
 def usuariosCadastro(request):

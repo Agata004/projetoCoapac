@@ -3,34 +3,38 @@
 {% block title %}Visualização de Usuário{% endblock %}
 
 {% block content %}
-    <div class="col-1">
-        <div>
-            <a href="{% url 'usuarioCadastro' %}" class="btn btn-primary">Cadastrar Usuário</a>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-1">
+            <div>
+                <a href="{% url 'usuarioCadastro' %}" class="botao">Cadastrar Usuário</a>
+            </div>
+        </div>
+        <div class="col-10">
+            <h2>Lista de Usuários</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Credencial</th>
+                        <th>Nome</th>
+                        <th>Editar</th>
+                        <th>Excluir</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for usuario in usuarios %}
+                    <tr>
+                        <td>{{ usuario.credencial }}</td>
+                        <td>{{ usuario.nome }}</td>
+                        <td><a href="{% url 'usuarioEditar' usuario.id %}" class="btn btn-warning">Editar</a></td>
+                        <td><a href="{% url 'usuarioExcluir' usuario.id %}" class="btn btn-danger">Excluir</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-1">
         </div>
     </div>
-    <div class="col-10">
-        <h2>Lista de Usuários</h2>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Credencial</th>
-                    <th>Nome</th>
-                    <th>Editar</th>
-                    <th>Excluir</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for usuario in usuarios %}
-                <tr>
-                    <td>{{ usuario.credencial }}</td>
-                    <td>{{ usuario.nome }}</td>
-                    <td><a href="{% url 'usuarioEditar' usuario.id %}" class="btn btn-warning">Editar</a></td>
-                    <td><a href="{% url 'usuarioExcluir' usuario.id %}" class="btn btn-danger">Excluir</a></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-    <div class="col-1">
-    </div>
+</div>
 {% endblock %}

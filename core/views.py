@@ -5,8 +5,8 @@ def index(request):
     return render(request, 'index.html')
 def base(request):
     return render(request, 'base.html')
-def emprestimos(request):
-    return render(request, 'emprestimos.html')
+def emprestimo(request):
+    return render(request, 'emprestimo.html')
 def inicial(request):
     return render(request, 'inicial.html')
 def itensCadastroDevolutivos(request):

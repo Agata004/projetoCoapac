@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 
@@ -11,12 +13,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/7a604ac3ba.js" crossorigin="anonymous"></script>
 </head>
 <style>
     .navbar {
         background-color: #3f131e;
         color: white;
-        padding: 0 15px;
+        padding: 0px;
         font-size: 40px;
         display: flex;
         justify-content: center;
@@ -29,6 +32,10 @@
         line-height: 1;
         font-size: 40px;
         font-weight: bold;
+    }
+
+    .navbar .row {
+        height: 100px;
     }
 
     body {
@@ -68,28 +75,31 @@
 
 <body>
     <header>
-    <nav class="navbar">
-        <div class="container-fluid">
-            <a href="#" class="logo">Logo</a>
-    <ul class="nav-links">
-      <li><a href="#">Início</a></li>
-      <li><a href="#">Sobre</a></li>
-      <li><a href="#">Contato</a></li>
-    </ul>
-        </div>
-    </nav>
+        <nav class="navbar">
+            <div style="margin: 0; overflow: hidden;" class="container-fluid">
+                <div style="width: 100vw;" class="row">
+                    <div style="margin: auto; margin-top: 10px; text-align: center; height: 100px" class="col-2 col-md-2 col-xl-2">
+                        <img src="{% static 'logo.jpeg' %}" alt="Logo" style="height: 80px;">
+                    </div>
+                    <div style="height: 100px" class="col-8 col-md-8 col-xl-8 justify-content-center align-items-center d-flex">
+                        COAPAC
+                    </div>
+                    <div style="overflow: hidden; height: 100px; text-align: center; padding-top: 20px;" class="col-2 col-md-2 col-xl-2">
+                        <a href="{% url 'emprestimo' %}"><i class="fa-solid fa-house fa-lg" style="color: #ffffff; height: 80px;"></i></a>
+                    </div>
+        </nav>
     </header>
     {% block content %}
     <div class="container-fluid">
         <div class="row">
-
-            <div class="col-1">
+            <div class="col-12 col-md-1">
                 <div>Botão de cadastro</div>
             </div>
-            <div class="col-10">
+            <div class="col-12 col-md-10">
                 <div>Área de Conteúdo</div>
             </div>
-            <div class="col-1">
+            <div class="col-12 col-md-1">
+                <div>Botão de login</div>
             </div>
         </div>
     </div>

@@ -15,8 +15,8 @@ class Emprestimo(models.Model):
     idEmprestimo = models.AutoField('Empréstimo', primary_key=True)
     dataSaida = models.DateField('Data de Saída')
     dataDevolucao = models.DateField('Data de Devolução')
-    comunidadeEscolar = models.ManyToManyField(ComunidadeEscolar)
-    usuarios = models.ManyToManyField(Usuarios)
+    comunidadeEscolar = models.ForeignKey(ComunidadeEscolar, on_delete=models.PROTECT)
+    usuarios = models.ForeignKey(Usuarios, on_delete=models.PROTECT)
 
 class TipoProduto(models.Model):
     nome = models.CharField('Tipo do Produto', max_length=100)
@@ -25,9 +25,3 @@ class Produtos(models.Model):
     nome = models.CharField('Produto', max_length=100)
     TipoProduto = models.ForeignKey(TipoProduto, on_delete=models.PROTECT)
     Emprestimo = models.ForeignKey(Emprestimo, on_delete=models.PROTECT)
-
-class Entrega(models.Model):
-    dataSaida = models.DateField('Data de Saída')
-    quantidade = models.IntegerField('Quantidade')
-    usuario = models.ManyToManyField(Usuarios)
-    produto = models.ManyToManyField(Produtos)

@@ -22,16 +22,16 @@
                 <img src="{% static 'logo.jpeg' %}" alt="">
             </div>
             <div style="margin: 0px; padding: 0%;" class="col-12 col-md-5 col-xxl-5">
-                <form id="loginForm" action="" method="post">
+                <form id="loginForm" method="post" action="{% url 'index' %}" onsubmit="return verificaLogin()">
                     {% csrf_token %}
                     <div class="form_dentro">
                         <h1>Login:</h1>
                         <br> <br>
                         <i class="fa-solid fa-user fa-4x" style="color: #3f131e;"></i>
-                        <input type="number" inputmode="numeric" name="login">
+                        <input type="number" inputmode="numeric" name="login" id="login" placeholder="Digite sua credencial">
                         <br> <br>
                         <i class="fa-solid fa-lock fa-4x" style="color: #3f131e;"></i>
-                        <input type="password" name="senha">
+                        <input type="password" name="senha" id="senha" placeholder="Digite sua senha">
                         <br> <br> <br>
                         <input type="submit" value="Entrar" class="buton">
                     </div>
@@ -39,6 +39,31 @@
             </div>
         </div>
     </div>
+    <script>
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.textContent = message;
+            toast.classList.add("show");
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 3000);
+        }
+
+        function verificaLogin() {
+            const login = document.getElementById("login").value;
+            const senha = document.getElementById("senha").value;
+            
+            if (login === "") {
+                showToast("Por favor, preencha o campo de credencial!");
+                return false;
+            }
+            if (senha === "") {
+                showToast("Por favor, preencha o campo de senha!");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </body>
 
 </html>

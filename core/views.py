@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
 from .models import ComunidadeEscolar, Usuarios, TipoProduto, Produtos, Emprestimo
 from .forms import ComunidadeEscolarForm, UsuariosForm, TipoProdutoForm, ProdutosForm, EmprestimoForm
 
@@ -6,23 +7,22 @@ from .forms import ComunidadeEscolarForm, UsuariosForm, TipoProdutoForm, Produto
 def index(request):
     if request.method == 'POST':
         login = request.POST.get('login')
-        senha = request.POST.get('senha')
-        
-        # Verificar se os campos não estão vazios
-        if not login or not senha:
-            return render(request, 'index.html', {'toast': 'Login e senha não podem estar vazios.'})
-            
+        senha = request.POST.get('senha')   
         try:
-            # Tenta encontrar um usuário com a credencial e senha fornecidas
-            usuario = Usuario.objects.get(credencial=login, senha=senha)
-            
-            # Se encontrou o usuário, verifica se é admin (credencial 1)
-            if usuario.credencial == '1':
-                return redirect('usuarioVisualizacao')
+            # Tenta encontrar um usuário pela credencial
+            usuario = Usuarios.objects.get(credencial=login)
+            # Verifica se a senha está correta
+            if usuario.check_password(senha):
+                # Se a senha está correta, verifica se é admin (credencial 1)
+                if int(login) == 412365:
+                    return redirect('usuariosVisualizacao')
+                else:
+                    return redirect('inicial')
             else:
-                return redirect('inicial')
+                # Senha incorreta
+                return render(request, 'index.html', {'toast': 'Credencial ou senha inválidos.'})
                 
-        except Usuario.DoesNotExist:
+        except Usuarios.DoesNotExist:
             # Se não encontrou o usuário, retorna para o index com mensagem de erro
             return render(request, 'index.html', {'toast': 'Credencial ou senha inválidos.'})
     return render(request, 'index.html')
@@ -51,6 +51,7 @@ def usuariosCadastro(request):
     form = UsuariosForm(request.POST or None)
     if form.is_valid():
         form.save()
+        messages.success(request, 'Usuário cadastrado com sucesso.')
         return redirect('usuariosVisualizacao')
     
     contexto = {
@@ -63,9 +64,18 @@ def usuarios_editar(request, credencial):
     form = UsuariosForm(request.POST or None, instance=usuarios)
     if form.is_valid():
         form.save()
+        messages.success(request, 'Usuário atualizado com sucesso.')
         return redirect('usuariosVisualizacao')
     
     contexto = {
         'form': form
     }
     return render(request, 'usuariosCadastro.html', contexto)
+
+def usuarios_delete(request, credencial):
+    usuario = get_object_or_404(Usuarios, credencial=credencial)
+    if request.method == 'POST':
+        usuario.delete()
+        messages.success(request, 'Usuário excluído com sucesso.')
+        return redirect('usuariosVisualizacao')
+    return render(request, 'usuarios_confirm_delete.html', {'usuario': usuario})

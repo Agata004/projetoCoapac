@@ -7,9 +7,18 @@ class ComunidadeEscolarForm(forms.ModelForm):
         fields = ['matricula', 'nome', 'vinculo', 'turmaouDisciplina']
 
 class UsuariosForm(forms.ModelForm):
+    senha = forms.CharField(widget=forms.PasswordInput)
+    
     class Meta:
         model = Usuarios
         fields = ['credencial', 'nome', 'senha']
+        
+    def save(self, commit=True):
+        usuario = super().save(commit=False)
+        usuario.set_password(self.cleaned_data['senha'])
+        if commit:
+            usuario.save()
+        return usuario
 
 class TipoProdutoForm(forms.ModelForm):
     class Meta:

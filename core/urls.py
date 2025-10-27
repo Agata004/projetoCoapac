@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import index, base, emprestimo, inicial, itensCadastroDevolutivos, itensCadastroNaoDevolutivos, itensVisualizacao 
-from .views import usuariosCadastro, usuariosVisualizacao, usuarios_editar 
+from .views import usuariosCadastro, usuariosVisualizacao, usuarios_editar, usuarios_delete   
 
 urlpatterns = [
     path('base/', base, name='base'),
@@ -12,4 +12,6 @@ urlpatterns = [
     path('itensVisualizacao/', itensVisualizacao, name='itensVisualizacao'),
     path('usuariosCadastro/', usuariosCadastro, name='usuariosCadastro'),
     path('usuariosVisualizacao/', usuariosVisualizacao, name='usuariosVisualizacao'),
+    path('usuariosCadastro/<int:credencial>/', usuarios_editar, name='usuariosEditar'),
+    path('usuariosVisualizacao/<int:credencial>/', usuarios_delete, name='usuariosDelete'),
 ]

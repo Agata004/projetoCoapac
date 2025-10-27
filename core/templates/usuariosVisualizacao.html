@@ -17,20 +17,21 @@
                     <tr>
                         <th>Credencial</th>
                         <th>Nome</th>
-                        <th>Senha</th>
-                        <th>Editar</th>
-                        <th>Excluir</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for usuario in usuarios %}
+                    {% for u in usuarios %}
                     <tr>
-                        <td>{{ usuario.credencial }}</td>
-                        <td>{{ usuario.nome }}</td>
-                        <td>{{ usuario.senha }}</td>
-                        <td><a href="{% url 'usuarioEditar' usuario.id %}" class="btn btn-warning">Editar</a></td>
-                        <td><a href="{% url 'usuarioExcluir' usuario.id %}" class="btn btn-danger">Excluir</a></td>
+                        <td>{{ u.credencial }}</td>
+                        <td>{{ u.nome }}</td>
+                        <td>
+                            <a href="{% url 'usuariosEditar' u.credencial %}" class="btn btn-warning">Editar</a>
+                            <a href="{% url 'usuariosDelete' u.credencial %}" class="btn btn-danger">Excluir</a>
+                        </td>
                     </tr>
+                    {% empty %}
+                    <tr><td colspan="3">Nenhum usuário cadastrado.</td></tr>
                     {% endfor %}
                 </tbody>
             </table>

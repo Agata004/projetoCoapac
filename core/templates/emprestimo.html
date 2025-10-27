@@ -3,13 +3,62 @@
 {% block title %}Empréstimo{% endblock %}
 
 {% block content %}
-
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12">
-            <h2 style="text-align: center;">Página de Empréstimo</h2>
-            <p style="text-align: center;">Conteúdo relacionado ao empréstimo será exibido aqui.</p>
+        <div class="col-4">
+
+        </div>
+        <div class="col-4">
+            <form method="post">
+                {% csrf_token %}
+                <h2>Cadastro de Empréstimo</h2>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label for="produto" class="form-label">Produto</label>
+                                <input type="text" class="form-control" id="produto" name="produto" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="data_saida" class="form-label">Data de saída</label>
+                                <input type="date" class="form-control" id="data_saida" name="data_saida" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="requerente" class="form-label">Requerente</label>
+                                <input type="text" class="form-control" id="requerente" name="requerente" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="vinculo" class="form-label">Vínculo</label>
+                                <input type="text" class="form-control" id="vinculo" name="vinculo" required>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label for="responsavel" class="form-label">Responsável</label>
+                                <input type="text" class="form-control" id="responsavel" name="responsavel" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="data_entrega" class="form-label">Data de entrega</label>
+                                <input type="date" class="form-control" id="data_entrega" name="data_entrega" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="matricula" class="form-label">Matrícula</label>
+                                <input type="text" class="form-control" id="matricula" name="matricula" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="turma_disciplina" class="form-label">Turma ou disciplina</label>
+                                <input type="text" class="form-control" id="turma_disciplina" name="turma_disciplina"
+                                    required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-4">
+
         </div>
     </div>
 </div>
+
 {% endblock %}

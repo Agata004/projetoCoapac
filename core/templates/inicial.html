@@ -1,20 +1,52 @@
 {% extends 'base.html' %}
-{% block title %}Empréstimos{% endblock %}
+
+{% block title %}Inicial{% endblock %}
 
 {% block content %}
 <div class="container-fluid">
     <div class="row">
-        <div class="col-1">
-            <div>
-                <a href="{% url 'itensCadastroDevolutivos' %}" class="botao">Cadastrar itens com devolução</a>
-                <a href="{% url 'itensCadastroNaoDevolutivos' %}" class="botao">Cadastrar itens sem devolução</a>
-            </div>
+        <div style="text-align: center;" class="col-12 col-sm-2 col-md-2 col-lg-1">
+            <div><a href="{% url 'emprestimo' %}" class="botao">Cadastrar empréstimo</a></div>
+            <div><a href="{% url 'itensCadastroDevolutivos' %}" class="botao">Cadastrar itens devolutivos</a></div>
+            <div><a href="{% url 'itensCadastroNaoDevolutivos' %}" class="botao">Cadastrar itens não devolutivos</a></div>
+            <div><a href="{% url 'itensVisualizacao' %}" class="botao">Visualizar listas de itens</a></div>
         </div>
-        <div class="col-10">
-
+        <div style="padding: 0 30px; text-align: center;" class="col-12 col-sm-8 col-md-8 col-lg-10">
+            <h2>Lista de empréstimos</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Data de saída</th>
+                        <th>Data de entrega</th>
+                        <th>Responsável</th>
+                        <th>Requerente</th>
+                        <th>Matrícula</th>
+                        <th>Vínculo</th>
+                        <th>Turma ou disciplina</th>
+                        <th>Entregue</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for usuario in usuarios %}
+                    <tr>
+                        <td>{{ item.nome }}</td>
+                        <td>{{ usuario.data_saida }}</td>
+                        <td>{{ usuario.data_entrega }}</td>
+                        <td>{{ usuario.responsavel }}</td>
+                        <td>{{ usuario.requerente }}</td>
+                        <td>{{ usuario.matricula }}</td>
+                        <td>{{ usuario.vinculo }}</td>
+                        <td>{{ usuario.turma_disciplina }}</td>
+                        <td>{{ usuario.entregue }}</td>
+                        <td><a href="{% url 'usuarioEditar' usuario.id %}" class="btn btn-warning">Editar</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
-        <div class="col-1">
-
+        <div class="col-12 col-sm-2 col-md-2 col-lg-1">
         </div>
     </div>
 </div>

@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import index, base, emprestimo, inicial, itensCadastroDevolutivos, itensCadastroNaoDevolutivos, itensVisualizacao, usuariosCadastro, usuariosVisualizacao
+from .views import index, base, emprestimo, inicial, itensCadastroDevolutivos, itensCadastroNaoDevolutivos, itensVisualizacao 
+from .views import usuariosCadastro, usuariosVisualizacao, usuarios_editar 
 
 urlpatterns = [
     path('base/', base, name='base'),
@@ -9,6 +10,6 @@ urlpatterns = [
     path('itensCadastroDevolutivos/', itensCadastroDevolutivos, name='itensCadastroDevolutivos'),
     path('itensCadastroNaoDevolutivos/', itensCadastroNaoDevolutivos, name='itensCadastroNaoDevolutivos'),
     path('itensVisualizacao/', itensVisualizacao, name='itensVisualizacao'),
-    path('usuarioCadastro/', usuariosCadastro, name='usuarioCadastro'),
-    path('usuarioVisualizacao/', usuariosVisualizacao, name='usuarioVisualizacao'),
+    path('usuariosCadastro/', usuariosCadastro, name='usuariosCadastro'),
+    path('usuariosVisualizacao/', usuariosVisualizacao, name='usuariosVisualizacao'),
 ]

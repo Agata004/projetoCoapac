@@ -29,18 +29,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for usuario in usuarios %}
+                    {% for emprestimo in emprestimos %}
                     <tr>
-                        <td>{{ item.nome }}</td>
-                        <td>{{ usuario.data_saida }}</td>
-                        <td>{{ usuario.data_entrega }}</td>
-                        <td>{{ usuario.responsavel }}</td>
-                        <td>{{ usuario.requerente }}</td>
-                        <td>{{ usuario.matricula }}</td>
-                        <td>{{ usuario.vinculo }}</td>
-                        <td>{{ usuario.turma_disciplina }}</td>
-                        <td>{{ usuario.entregue }}</td>
-                        <td><a href="{% url 'usuarioEditar' usuario.id %}" class="btn btn-warning">Editar</a></td>
+                        <td>{{ emprestimo.produtos.nome }}</td>
+                        <td>{{ emprestimo.dataSaida }}</td>
+                        <td>{{ emprestimo.dataDevolucao }}</td>
+                        <td>{{ emprestimo.usuarios.nome }}</td>
+                        <td>{{ emprestimo.comunidadeEscolar.nome }}</td>
+                        <td>{{ emprestimo.comunidadeEscolar.matricula }}</td>
+                        <td>{{ emprestimo.comunidadeEscolar.vinculo }}</td>
+                        <td>{{ emprestimo.comunidadeEscolar.turmaouDisciplina }}</td>
+                        <td>{% if emprestimo.entregue %}Sim{% else %}Não{% endif %}</td>
                     </tr>
                     {% endfor %}
                 </tbody>

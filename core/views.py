@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from django.core.exceptions import ValidationError
 from .models import ComunidadeEscolar, Usuarios, TipoProduto, Produtos, Emprestimo
 from .forms import UsuariosForm, TipoProdutoForm, ProdutosForm, EmprestimoForm
 
@@ -7,24 +8,33 @@ from .forms import UsuariosForm, TipoProdutoForm, ProdutosForm, EmprestimoForm
 def index(request):
     if request.method == 'POST':
         login = request.POST.get('login')
-        senha = request.POST.get('senha')   
+        senha = request.POST.get('senha')
+        
         try:
+            # Valida se o login é um número antes de prosseguir
+            try:
+                login = int(login)
+            except ValueError:
+                raise ValidationError("Credencial ou senha inválidos.")
+
             # Tenta encontrar um usuário pela credencial
             usuario = Usuarios.objects.get(credencial=login)
+
             # Verifica se a senha está correta
             if usuario.check_password(senha):
-                # Se a senha está correta, verifica se é admin (credencial 1)
-                if int(login) == 412365:
+                # Se a senha está correta, verifica se é admin (credencial 412365)
+                if login == 412365:
                     return redirect('usuariosVisualizacao')
                 else:
                     return redirect('inicial')
             else:
                 # Senha incorreta
-                return render(request, 'index.html', {'toast': 'Credencial ou senha inválidos.'})
-                
-        except Usuarios.DoesNotExist:
-            # Se não encontrou o usuário, retorna para o index com mensagem de erro
+                raise ValidationError("Credencial ou senha inválidos.")
+
+        except (Usuarios.DoesNotExist, ValidationError):
+            # Se não encontrou o usuário ou houve erro de validação, retorna para o index com mensagem de erro
             return render(request, 'index.html', {'toast': 'Credencial ou senha inválidos.'})
+
     return render(request, 'index.html')
 
 def base(request):

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index, base, inicial, itensCadastroDevolutivos, itensCadastroNaoDevolutivos, itensVisualizacao 
+from .views import index, base, inicial, itensCadastroDevolutivos, itensCadastroNaoDevolutivos, itensVisualizacao
 from .views import usuariosCadastro, usuariosVisualizacao, usuarios_editar, usuarios_delete  
 from .views import emprestimo
 

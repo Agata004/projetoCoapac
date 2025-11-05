@@ -13,20 +13,20 @@
         <div class="col-4">
             <form style="margin-top: 5vh;" method="post">
                 {% csrf_token %}
-                <h2>Cadastro de Novo Usuário</h2>
+                <h2>{% if editar %}Editar Usuário{% else %}Cadastro de Novo Usuário{% endif %}</h2>
                 <div class="mb-3">
-                    <label for="credencial" class="form-label">Credencial</label>
-                    <input type="text" class="form-control" id="credencial" name="credencial" required>
+                    <label for="id_credencial" class="form-label">Credencial</label>
+                    <input type="text" class="form-control" id="id_credencial" name="credencial" value="{% if editar %}{{ form.credencial.value }}{% else %}{% endif %}" required>
                 </div>
                 <div class="mb-3">
-                    <label for="nome" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="nome" name="nome" required>
+                    <label for="id_nome" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="id_nome" name="nome" value="{% if editar %}{{ form.nome.value }}{% else %}{% endif %}" required>
                 </div>
                 <div class="mb-3">
-                    <label for="senha">Senha</label>
-                    <input type="password" class="form-control" id="senha" name="senha" required>
+                    <label for="id_senha" class="form-label">Senha</label>
+                    <input type="password" class="form-control" id="id_senha" name="senha" value="{% if editar %}{{ form.senha.value }}{% else %}{% endif %}" required>
                 </div>
-                <button type="submit" class="botao">Cadastrar</button>
+                <button type="submit" class="botao">{% if editar %}Atualizar{% else %}Cadastrar{% endif %}</button>
             </form>
         </div>
         <div class="col-4">

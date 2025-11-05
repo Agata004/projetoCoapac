@@ -1,10 +1,5 @@
 from django import forms
-from .models import ComunidadeEscolar, Usuarios, TipoProduto, Produtos, Emprestimo
-
-class ComunidadeEscolarForm(forms.ModelForm):
-    class Meta:
-        model = ComunidadeEscolar
-        fields = ['matricula', 'nome', 'vinculo', 'turmaouDisciplina']
+from .models import Usuarios, TipoProduto, Produtos, Emprestimo
 
 class UsuariosForm(forms.ModelForm):
     senha = forms.CharField(widget=forms.PasswordInput)

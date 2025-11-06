@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Cadastro dos tipos de Itens{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div style="text-align: center;" class="col-12 col-sm-2 col-md-2 col-lg-1">
+        </div>
+        <div style="padding: 0 30px; text-align: center;" class="col-12 col-sm-8 col-md-8 col-lg-10">
+            <h2>Cadastro de Tipos de Itens</h2>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome do Tipo de Item</label>
+                    <input type="text" class="form-control" id="nome" name="nome" required>
+                </div>
+                <div class="mb-3">
+                    <label for="codigo_tipo" class="form-label">Código do Tipo de Item</label>
+                    <input type="text" class="form-control" id="codigo_tipo" name="codigo_tipo" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

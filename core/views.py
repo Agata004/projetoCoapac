@@ -96,12 +96,14 @@ def inicial(request):
     return render(request, 'inicial.html', contexto)
 
 # Itens/Produtos
-def itensCadastroDevolutivos(request):
-    return render(request, 'itensCadastroDevolutivos.html')
-def itensCadastroNaoDevolutivos(request):
-    return render(request, 'itensCadastroNaoDevolutivos.html')
+def itensCadastro(request):
+    return render(request, 'itensCadastro.html')
 def itensVisualizacao(request):
     return render(request, 'itensVisualizacao.html')
+def tipoItensVisualizacao(request):
+    return render(request, 'tipoItensVisualizacao.html')
+def tipoItensCadastro(request):
+    return render(request, 'tipoItensCadastro.html')
 
 # Usuários
 def usuariosVisualizacao(request):

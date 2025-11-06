@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Visualização de Itens{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div style="text-align: center;" class="col-12 col-sm-2 col-md-2 col-lg-1">
+        </div>
+        <div style="padding: 0 30px; text-align: center;" class="col-12 col-sm-8 col-md-8 col-lg-10">
+            <h2>Lista de Itens</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nome do Item</th>
+                        <th>Código do Item</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in itens %}
+                    <tr>
+                        <td>{{ item.nome_item }}</td>
+                        <td>{{ item.codigo_item }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

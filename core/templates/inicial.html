@@ -3,13 +3,28 @@
 {% block title %}Inicial{% endblock %}
 
 {% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="row" style="justify-content: center;">
+                <div class="col-3"><a href="{% url 'emprestimo' %}" class="botao">
+                    Cadastrar empréstimo</a></div>
+                <div class="col-3"><a href="{% url 'itensCadastro' %}" class="botao">
+                    Cadastrar itens</a></div>
+                <div class="col-3"><a href="{% url 'itensCadastro' %}" class="botao">
+                    Cadastrar itens não devolutivos</a></div>
+                <div class="col-3"><a href="{% url 'itensVisualizacao' %}" class="botao">
+                    Visualizar listas de itens</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container-fluid">
     <div class="row">
         <div style="text-align: center;" class="col-12 col-sm-2 col-md-2 col-lg-1">
-            <div><a href="{% url 'emprestimo' %}" class="botao">Cadastrar empréstimo</a></div>
-            <div><a href="{% url 'itensCadastroDevolutivos' %}" class="botao">Cadastrar itens devolutivos</a></div>
-            <div><a href="{% url 'itensCadastroNaoDevolutivos' %}" class="botao">Cadastrar itens não devolutivos</a></div>
-            <div><a href="{% url 'itensVisualizacao' %}" class="botao">Visualizar listas de itens</a></div>
         </div>
         <div style="padding: 0 30px; text-align: center;" class="col-12 col-sm-8 col-md-8 col-lg-10">
             <h2>Lista de empréstimos</h2>

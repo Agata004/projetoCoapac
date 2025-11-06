@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Itens Devolutivos{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-4">
+
+            </div>
+            <div class="col-4">
+                <form method="post">
+                    {% csrf_token %}
+                    <h2 style="text-align: center;">Cadastro de Itens</h2>
+                    <div class="mb-3">
+                        <label for="nome_item" class="form-label">Nome do Item</label>
+                        <input type="text" class="form-control" id="nome_item" name="nome_item" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="marca_item" class="form-label">Marca do Item</label>
+                        <input type="text" class="form-control" id="marca_item" name="marca_item" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Tipo_produto" class="form-label">Tipo do Produto</label>
+                        <select class="form-select" id="Tipo_produto" name="Tipo_produto" required>
+                            <option value="">Selecione o Tipo do Produto</option>
+                            <option value="livro">Livro</option>
+                            <option value="material_didatico">Material Didático</option>
+                            <option value="equipamento">Equipamento</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <input type="radio" id="devolutivo" name="tipo_item" value="devolutivo">
+                        <label for="devolutivo">Devolutivo</label>
+                        <input type="radio" id="nao_devolutivo" name="tipo_item" value="nao_devolutivo">
+                        <label for="nao_devolutivo">Não Devolutivo</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Cadastrar Item</button>
+                </form>
+            <div class="col-4">
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

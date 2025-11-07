@@ -1,5 +1,5 @@
 from django import forms
-from .models import Usuarios, TipoProduto, Produtos, Emprestimo
+from .models import Usuarios, TipoProduto, Emprestimo
 
 class UsuariosForm(forms.ModelForm):
     senha = forms.CharField(widget=forms.PasswordInput)
@@ -18,14 +18,14 @@ class UsuariosForm(forms.ModelForm):
 class TipoProdutoForm(forms.ModelForm):
     class Meta:
         model = TipoProduto
-        fields = ['nome']
+        fields = ['nome', 'codigo']
 
-class ProdutosForm(forms.ModelForm):
-    class Meta:
-        model = Produtos
-        fields = ['nome', 'marca', 'tipoProduto']
+#class ProdutosForm(forms.ModelForm):
+#    class Meta:
+#        model = Produtos
+#        fields = ['nome', 'marca', 'tipoProduto']
 
 class EmprestimoForm(forms.ModelForm):
     class Meta:
         model = Emprestimo
-        fields = ['dataSaida', 'dataDevolucao', 'produtos', 'comunidadeEscolar', 'usuarios']
+        fields = ['dataSaida', 'dataDevolucao', 'comunidadeEscolar', 'usuarios']

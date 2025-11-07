@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .models import ComunidadeEscolar, Usuarios, TipoProduto, Produtos, Emprestimo
-from .forms import UsuariosForm, TipoProdutoForm, ProdutosForm, EmprestimoForm
+from .models import ComunidadeEscolar, Usuarios, TipoProduto, Emprestimo
+from .forms import UsuariosForm, TipoProdutoForm, EmprestimoForm
 
 # Ordenar alfabeticamente para encontrar mais fácil
 def index(request):
@@ -37,8 +37,8 @@ def emprestimo(request):
         if form.is_valid():
             try:
                 # Trata produto
-                produto_nome = request.POST.get('produtos')
-                produto = Produtos.objects.get(nome=produto_nome)
+                #produto_nome = request.POST.get('produtos')
+                #produto = Produtos.objects.get(nome=produto_nome)
 
                 # Trata usuário responsável
                 usuario_nome = request.POST.get('usuarios')
@@ -67,7 +67,7 @@ def emprestimo(request):
 
                 # Cria o empréstimo
                 emprestimo = form.save(commit=False)
-                emprestimo.produtos = produto
+                #emprestimo.produtos = produto
                 emprestimo.usuarios = usuario
                 emprestimo.comunidadeEscolar = comunidade
                 emprestimo.save()
@@ -75,8 +75,8 @@ def emprestimo(request):
                 messages.success(request, 'Empréstimo cadastrado com sucesso!')
                 return redirect('inicial')
 
-            except Produtos.DoesNotExist:
-                messages.error(request, f'O produto "{produto_nome}" não foi encontrado. Por favor, verifique o nome do produto.')
+            #except Produtos.DoesNotExist:
+            #    messages.error(request, f'O produto "{produto_nome}" não foi encontrado. Por favor, verifique o nome do produto.')
             except Usuarios.DoesNotExist:
                 messages.error(request, f'O usuário "{usuario_nome}" não foi encontrado. Por favor, verifique o nome do usuário.')
             except Exception as e:
@@ -100,10 +100,59 @@ def itensCadastro(request):
     return render(request, 'itensCadastro.html')
 def itensVisualizacao(request):
     return render(request, 'itensVisualizacao.html')
+
+# Tipo de Itens/Produtos
 def tipoItensVisualizacao(request):
-    return render(request, 'tipoItensVisualizacao.html')
+    tipos = TipoProduto.objects.all()
+    contexto = {
+        'tipos': tipos
+    }
+    return render(request, 'tipoItensVisualizacao.html', contexto)
+
 def tipoItensCadastro(request):
-    return render(request, 'tipoItensCadastro.html')
+    form = TipoProdutoForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        messages.success(request, 'Tipo de produto cadastrado com sucesso.')
+        return redirect('tipoItensVisualizacao')
+    
+    contexto = {
+        'form': form
+    }
+    return render(request, 'tipoItensCadastro.html', contexto)
+
+def tipoItensEditar(request, codigo):
+    tipos = get_object_or_404(TipoProduto, codigo=codigo)
+    form = TipoProdutoForm(request.POST or None, instance=tipos)
+
+    form.fields['codigo'].widget.attrs['readonly'] = True # Impede edição do campo código
+
+    if request.method == 'POST':
+        if form.is_valid():
+            tipos.nome = form.cleaned_data['nome']
+            tipos.save()
+            messages.success(request, 'Tipo de produto atualizado com sucesso.')
+            return redirect('tipoItensVisualizacao')
+    else:
+        # Preenche manualmente os valores no contexto, sem usar o ModelForm instance
+        contexto = {
+            'form': form,
+            'codigo': tipos.codigo,
+            'nome': tipos.nome
+        }
+        return render(request, 'tipoItensCadastro.html', contexto)
+    
+    contexto = {
+        'form': form
+    }
+    return render(request, 'tipoItensCadastro.html', contexto)
+
+def tipoItensDelete(request, codigo):
+    tipos = get_object_or_404(TipoProduto, codigo=codigo)
+    if request.method == 'POST':
+        tipos.delete()
+        messages.success(request, 'Tipo de produto excluído com sucesso.')
+    return redirect('tipoItensVisualizacao')
 
 # Usuários
 def usuariosVisualizacao(request):
@@ -139,9 +188,12 @@ def usuarios_editar(request, credencial):
     return render(request, 'usuariosCadastro.html', contexto)
 
 def usuarios_delete(request, credencial):
-    usuario = get_object_or_404(Usuarios, credencial=credencial)
+    usuarios = get_object_or_404(Usuarios, credencial=credencial)
     if request.method == 'POST':
-        usuario.delete()
+        usuarios.delete()
         messages.success(request, 'Usuário excluído com sucesso.')
         return redirect('usuariosVisualizacao')
-    return render(request, 'usuarios_confirm_delete.html', {'usuario': usuario})
+    contexto = {
+        'usuarios': usuarios
+    }
+    return render(request, 'usuarios_confirm_delete.html', contexto)

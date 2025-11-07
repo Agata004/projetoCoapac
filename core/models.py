@@ -25,17 +25,18 @@ class Usuarios(models.Model):
         return check_password(raw_password, self.senha)
 
 class TipoProduto(models.Model):
+    codigo = models.IntegerField('Código do Tipo do Produto', primary_key=True, null=False)
     nome = models.CharField('Tipo do Produto', max_length=100)
 
-class Produtos(models.Model):
-    nome = models.CharField('Produto', max_length=100)
-    marca = models.CharField('Marca', max_length=50, null=True)
-    tipoProduto = models.ForeignKey(TipoProduto, on_delete=models.PROTECT)
+#class Produtos(models.Model):
+#    nome = models.CharField('Produto', max_length=100)
+#    marca = models.CharField('Marca', max_length=50, null=True)
+#   tipoProduto = models.ForeignKey(TipoProduto, on_delete=models.PROTECT, to_field='codigo')
 
 class Emprestimo(models.Model):
     idEmprestimo = models.AutoField('Empréstimo', primary_key=True)
     dataSaida = models.DateField('Data de Saída', null=True)  # permitir nulo temporariamente
     dataDevolucao = models.DateField('Data de Devolução', null=True)  # permitir nulo temporariamente
-    produtos = models.ForeignKey(Produtos, on_delete=models.PROTECT, null=True)  # permitir nulo temporariamente
+    # produtos = models.ForeignKey(Produtos, on_delete=models.PROTECT, null=True)  # permitir nulo temporariamente
     comunidadeEscolar = models.ForeignKey(ComunidadeEscolar, on_delete=models.PROTECT, null=True)  # permitir nulo temporariamente
     usuarios = models.ForeignKey(Usuarios, on_delete=models.PROTECT, null=True)  # permitir nulo temporariamente

@@ -6,20 +6,27 @@
 <div class="container-fluid">
     <div class="row">
         <div style="text-align: center;" class="col-12 col-sm-2 col-md-2 col-lg-1">
+            <a href="{% url 'tipoItensVisualizacao' %}" class="botao">Voltar</a>
         </div>
+
         <div style="padding: 0 30px; text-align: center;" class="col-12 col-sm-8 col-md-8 col-lg-10">
-            <h2>Cadastro de Tipos de Itens</h2>
+            <h2>{% if nome %}Editar Tipo de Item{% else %}Cadastrar Tipo de Item{% endif %}</h2>
+
             <form method="POST">
                 {% csrf_token %}
                 <div class="mb-3">
                     <label for="nome" class="form-label">Nome do Tipo de Item</label>
-                    <input type="text" class="form-control" id="nome" name="nome" required>
+                    <input type="text" class="form-control" id="nome" name="nome" value="{{ nome|default:'' }}" required>
                 </div>
+
                 <div class="mb-3">
-                    <label for="codigo_tipo" class="form-label">Código do Tipo de Item</label>
-                    <input type="text" class="form-control" id="codigo_tipo" name="codigo_tipo" required>
+                    <label for="codigo" class="form-label">Código do Tipo de Item</label>
+                    <input type="text" class="form-control" id="codigo" name="codigo" value="{{ codigo|default:'' }}" {% if nome %}readonly{% endif %} required>
                 </div>
-                <button type="submit" class="btn btn-primary">Cadastrar</button>
+
+                <button type="submit" class="btn btn-primary">
+                    {% if nome %}Salvar Alterações{% else %}Cadastrar{% endif %}
+                </button>
             </form>
         </div>
     </div>

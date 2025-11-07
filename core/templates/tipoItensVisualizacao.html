@@ -6,6 +6,9 @@
 <div class="container-fluid">
     <div class="row">
         <div style="text-align: center;" class="col-12 col-sm-2 col-md-2 col-lg-1">
+            <div>
+                <a href="{% url 'tipoItensCadastro' %}" class="botao">Cadastrar tipo de item</a>
+            </div>
         </div>
         <div style="padding: 0 30px; text-align: center;" class="col-12 col-sm-8 col-md-8 col-lg-10">
             <h2>Lista de Itens</h2>
@@ -14,13 +17,22 @@
                     <tr>
                         <th>Nome do Item</th>
                         <th>Código do Item</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for item in itens %}
+                    {% for tipo in tipos %}
                     <tr>
-                        <td>{{ item.nome_item }}</td>
-                        <td>{{ item.codigo_item }}</td>
+                        <td>{{ tipo.nome }}</td>
+                        <td>{{ tipo.codigo }}</td>
+                        <td>
+                            <a href="{% url 'tipoItensEditar' tipo.codigo %}" class="btn btn-warning">Editar</a>
+                            
+                            <form method="post" action="{% url 'tipoItensDelete' tipo.codigo %}" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja excluir este item?');">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Excluir</button>
+                            </form>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>

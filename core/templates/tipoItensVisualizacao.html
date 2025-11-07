@@ -11,6 +11,20 @@
             </div>
         </div>
         <div style="padding: 0 30px; text-align: center;" class="col-12 col-sm-8 col-md-8 col-lg-10">
+
+            <!-- Mensagens de exclusão -->
+            {% if messages %}
+            <div class="mb-3">
+                {% for message in messages %}
+                {% if "exclusao" in message.tags %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+
             <h2>Lista de Itens</h2>
             <table class="table table-striped">
                 <thead>
@@ -27,7 +41,6 @@
                         <td>{{ tipo.codigo }}</td>
                         <td>
                             <a href="{% url 'tipoItensEditar' tipo.codigo %}" class="btn btn-warning">Editar</a>
-                            
                             <form method="post" action="{% url 'tipoItensDelete' tipo.codigo %}" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja excluir este item?');">
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-danger">Excluir</button>

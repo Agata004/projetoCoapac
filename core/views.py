@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.db import IntegrityError
 from django.contrib import messages
 from .models import ComunidadeEscolar, Usuarios, TipoProduto, Emprestimo
 from .forms import UsuariosForm, TipoProdutoForm, EmprestimoForm
@@ -111,11 +112,18 @@ def tipoItensVisualizacao(request):
 
 def tipoItensCadastro(request):
     form = TipoProdutoForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        messages.success(request, 'Tipo de produto cadastrado com sucesso.')
-        return redirect('tipoItensVisualizacao')
-    
+    if request.method == 'POST':
+        if form.is_valid():
+            try:
+                form.save()
+                messages.success(request, 'Tipo de produto cadastrado com sucesso.')
+            except IntegrityError:
+                # Mensagem quando o código já existe
+                messages.error(request, 'O código informado já existe. Por favor, escolha outro.')
+            return redirect('tipoItensVisualizacao')
+        else:
+            messages.error(request, 'Erro ao cadastrar tipo de produto. Verifique os dados inseridos.')
+
     contexto = {
         'form': form
     }
@@ -136,7 +144,6 @@ def tipoItensEditar(request, codigo):
     else:
         # Preenche manualmente os valores no contexto, sem usar o ModelForm instance
         contexto = {
-            'form': form,
             'codigo': tipos.codigo,
             'nome': tipos.nome
         }
@@ -151,7 +158,7 @@ def tipoItensDelete(request, codigo):
     tipos = get_object_or_404(TipoProduto, codigo=codigo)
     if request.method == 'POST':
         tipos.delete()
-        messages.success(request, 'Tipo de produto excluído com sucesso.')
+        messages.success(request, 'Tipo de produto excluído com sucesso.', extra_tags='exclusao')
     return redirect('tipoItensVisualizacao')
 
 # Usuários

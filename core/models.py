@@ -28,10 +28,11 @@ class TipoProduto(models.Model):
     codigo = models.IntegerField('Código do Tipo do Produto', primary_key=True, null=False)
     nome = models.CharField('Tipo do Produto', max_length=100)
 
-#class Produtos(models.Model):
-#    nome = models.CharField('Produto', max_length=100)
-#    marca = models.CharField('Marca', max_length=50, null=True)
-#   tipoProduto = models.ForeignKey(TipoProduto, on_delete=models.PROTECT, to_field='codigo')
+class Produtos(models.Model):
+    nome = models.CharField('Produto', max_length=100)
+    marca = models.CharField('Marca', max_length=50, null=True)
+    devo_ou_nao = models.BooleanField('Devolutivo ou não', default=False)
+    tipoProduto = models.ForeignKey(TipoProduto, on_delete=models.PROTECT, to_field='codigo')
 
 class Emprestimo(models.Model):
     idEmprestimo = models.AutoField('Empréstimo', primary_key=True)

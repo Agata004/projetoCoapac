@@ -14,14 +14,14 @@
                     <thead>
                         <tr>
                             <th>Nome do Item</th>
-                            <th>Quantidade</th>
+                            <th>Marca</th>
                             <th>Descrição</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for item in itens %}
                         <tr>
-                            <td>{{ item.nome_item }}</td>
+                            <td>{{ item.nome }}</td>
                             <td>{{ item.quantidade }}</td>
                             <td>{{ item.descricao }}</td>
                         </tr>

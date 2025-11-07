@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db import IntegrityError
 from django.contrib import messages
-from .models import ComunidadeEscolar, Usuarios, TipoProduto, Emprestimo
-from .forms import UsuariosForm, TipoProdutoForm, EmprestimoForm
+from .models import ComunidadeEscolar, Usuarios, TipoProduto, Produtos, Emprestimo
+from .forms import UsuariosForm, TipoProdutoForm, EmprestimoForm, ProdutosForm
 
 # Ordenar alfabeticamente para encontrar mais fácil
 def index(request):
@@ -98,9 +98,22 @@ def inicial(request):
 
 # Itens/Produtos
 def itensCadastro(request):
-    return render(request, 'itensCadastro.html')
+    form = ProdutosForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        messages.success(request, 'Item cadastrado com sucesso.')
+        return redirect('itensVisualizacao')
+    contexto = {
+        'form': form
+    }
+    return render(request, 'itensCadastro.html', contexto)
+
 def itensVisualizacao(request):
-    return render(request, 'itensVisualizacao.html')
+    itens = Produtos.objects.all()
+    contexto = {
+        'itens': itens
+    }
+    return render(request, 'itensVisualizacao.html', contexto)
 
 # Tipo de Itens/Produtos
 def tipoItensVisualizacao(request):

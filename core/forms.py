@@ -1,5 +1,5 @@
 from django import forms
-from .models import Usuarios, TipoProduto, Emprestimo
+from .models import Usuarios, TipoProduto, Produtos, Emprestimo
 
 class UsuariosForm(forms.ModelForm):
     senha = forms.CharField(widget=forms.PasswordInput)
@@ -20,10 +20,13 @@ class TipoProdutoForm(forms.ModelForm):
         model = TipoProduto
         fields = ['nome', 'codigo']
 
-#class ProdutosForm(forms.ModelForm):
-#    class Meta:
-#        model = Produtos
-#        fields = ['nome', 'marca', 'tipoProduto']
+class ProdutosForm(forms.ModelForm):
+    class Meta:
+        model = Produtos
+        fields = ['nome', 'marca', 'tipoProduto', 'devo_ou_nao']
+        widgets = {
+            'devo_ou_nao': forms.RadioSelect(choices=[(True, 'Devolutivo'), (False, 'Não Devolutivo')])
+        }
 
 class EmprestimoForm(forms.ModelForm):
     class Meta:

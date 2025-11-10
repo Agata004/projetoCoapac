@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import index, base, inicial, itensCadastro, itensVisualizacao
+from .views import index, base, inicial, emprestimo
 from .views import usuariosCadastro, usuariosVisualizacao, usuarios_editar, usuarios_delete  
-from .views import emprestimo
+from .views import itensCadastro, itensVisualizacao
 from .views import tipoItensEditar, tipoItensDelete, tipoItensVisualizacao, tipoItensCadastro
 
 urlpatterns = [

@@ -2,13 +2,14 @@
 
 {% block title %}Cadastro de Usuário{% endblock %}
 
+{% block inicial %}
+<a href="{% url 'usuariosVisualizacao' %}"><i class="fa-solid fa-house fa-lg" style="color: #ffffff; height: 80px;"></i></a>
+{% endblock %}
+
 {% block content %}
 <div class="container-fluid">
     <div class="row">
         <div class="col-4">
-            <div>
-                <a href="{% url 'usuariosVisualizacao' %}" class="botao">Voltar à Lista</a>
-            </div>
         </div>
         <div class="col-4">
             <form style="margin-top: 5vh;" method="post">

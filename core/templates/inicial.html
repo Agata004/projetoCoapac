@@ -2,6 +2,10 @@
 
 {% block title %}Inicial{% endblock %}
 
+{% block inicial %}
+<a href="{% url 'inicial' %}"><i class="fa-solid fa-house fa-lg" style="color: #ffffff; height: 80px;"></i></a>
+{% endblock %}
+
 {% block content %}
 
 <div class="container-fluid">
@@ -9,8 +13,10 @@
         <div style="text-align: center;" class="col-12 col-sm-2 col-md-2 col-lg-1">
             <div><a href="{% url 'emprestimo' %}" class="botao">Cadastrar empréstimo</a></div>
             <div><a href="{% url 'itensCadastro' %}" class="botao">Cadastrar itens</a></div>
-            <div><a href="{% url 'itensVisualizacao' %}" class="botao">Visualizar listas de itens</a></div>
+            <div><a href="{% url 'itensVisualizacao' %}" class="botao">Itens cadastrados</a></div>
+            <div><a href="{% url 'tipoItensVisualizacao' %}" class="botao">Tipos de itens</a></div>
         </div>
+
         <div style="padding: 0 30px; text-align: center;" class="col-12 col-sm-8 col-md-8 col-lg-10">
             <h2>Lista de empréstimos</h2>
             <table class="table table-striped">

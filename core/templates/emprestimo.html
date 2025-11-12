@@ -2,12 +2,19 @@
 
 {% block title %}Empréstimo{% endblock %}
 
+{% block inicial %}
+<a href="{% url 'inicial' %}"><i class="fa-solid fa-house fa-lg" style="color: #ffffff; height: 80px;"></i></a>
+{% endblock %}
+
 {% block content %}
 <div class="container-fluid">
     <div class="row">
         <div class="col-4">
-
+            <div>
+                <a href="{% url 'itensVisualizacao' %}" class="botao">Itens cadastrados</a>
+            </div>
         </div>
+
         <div class="col-4">
             <form method="post">
                 {% csrf_token %}
@@ -47,18 +54,36 @@
                             </div>
                             <div class="mb-3">
                                 <label for="turma_disciplina" class="form-label">Turma ou disciplina</label>
-                                <input type="text" class="form-control" id="turma_disciplina" name="turma_disciplina" required>
+                                <input type="text" class="form-control" id="turma_disciplina" name="turma_disciplina"
+                                    required>
                             </div>
-                            <button type="submit" class="botao">Cadastrar</button>
                         </div>
+                        <button type="submit" class="botao">Cadastrar</button>
                     </div>
                 </div>
             </form>
         </div>
         <div class="col-4">
-
         </div>
     </div>
 </div>
+<style>
+    .container-fluid {
+        margin-top: 20px;
+    }
 
+    h2 {
+        margin: 20px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    form {
+        justify-content: center;
+        text-align: center;
+        padding: 20px;
+        border: #3f131e 2px solid;
+        border-radius: 10px;
+    }
+</style>
 {% endblock %}

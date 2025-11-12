@@ -2,14 +2,17 @@
 
 {% block title %}Cadastro dos tipos de Itens{% endblock %}
 
+{% block inicial %}
+<a href="{% url 'usuariosVisualizacao' %}"><i class="fa-solid fa-house fa-lg" style="color: #ffffff; height: 80px;"></i></a>
+{% endblock %}
+
 {% block content %}
 <div class="container-fluid">
     <div class="row">
-        <div style="text-align: center;" class="col-12 col-sm-2 col-md-2 col-lg-1">
-            <a href="{% url 'tipoItensVisualizacao' %}" class="botao">Voltar</a>
+        <div style="text-align: center;" class="col-4">
         </div>
 
-        <div style="padding: 0 30px; text-align: center;" class="col-12 col-sm-8 col-md-8 col-lg-10">
+        <div style="padding: 0 30px; text-align: center;" class="col-4">
 
             <!-- Mensagens de cadastro e edição -->
             {% if messages %}
@@ -29,13 +32,15 @@
             <form method="POST">
                 {% csrf_token %}
                 <div class="mb-3">
-                    <label for="nome" class="form-label">Nome do Tipo de Item</label>
-                    <input type="text" class="form-control" id="nome" name="nome" value="{{ nome|default:'' }}"required>
+                    <label for="nome" class="form-label">Tipo de item</label>
+                    <input type="text" class="form-control" id="nome" name="nome" value="{{ nome|default:'' }}"
+                        required>
                 </div>
 
                 <div class="mb-3">
-                    <label for="codigo" class="form-label">Código do Tipo de Item</label>
-                    <input type="text" class="form-control" id="codigo" name="codigo" value="{{ codigo|default:'' }}" {% if nome %}readonly{% endif %} required>
+                    <label for="codigo" class="form-label">Tipo de item</label>
+                    <input type="text" class="form-control" id="codigo" name="codigo" value="{{ codigo|default:'' }}" {%
+                        if nome %}readonly{% endif %} required>
                 </div>
 
                 <button type="submit" class="btn btn-primary">
@@ -43,6 +48,26 @@
                 </button>
             </form>
         </div>
+        <div class="col-4"></div>
     </div>
 </div>
+<style>
+    .container-fluid {
+        margin-top: 20px;
+    }
+
+    h2 {
+        margin: 20px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    form {
+        justify-content: center;
+        text-align: center;
+        padding: 20px;
+        border: #3f131e 2px solid;
+        border-radius: 10px;
+    }
+</style>
 {% endblock %}

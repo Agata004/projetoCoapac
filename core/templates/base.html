@@ -88,8 +88,10 @@
                     </div>
                     <div style="overflow: hidden; height: 100px; text-align: center; padding-top: 20px;"
                         class="col-2 col-md-2 col-xl-2">
+                        {% block inicial %}
                         <a href="{% url 'inicial' %}"><i class="fa-solid fa-house fa-lg"
                                 style="color: #ffffff; height: 80px;"></i></a>
+                        {% endblock %}
                     </div>
                 </div>
             </div>

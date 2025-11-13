@@ -19,12 +19,6 @@
             <form method="post">
                 {% csrf_token %}
                 <h2>Cadastro de Empréstimo</h2>
-
-                {% if usuario_logado.is_authenticated %}
-                <div class="alert alert-info" role="alert">
-                    <strong>Responsável:</strong> {{ usuario_logado.get_full_name|default:usuario_logado.username }}
-                </div>
-                {% endif %}
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-6">
@@ -34,33 +28,33 @@
                             </div>
                             <div class="mb-3">
                                 <label for="data_saida" class="form-label">Data de saída</label>
-                                <input type="date" class="form-control" id="data_saida" name="dataSaida" required>
+                                {{ form.dataSaida }}
                             </div>
                             <div class="mb-3">
                                 <label for="requerente" class="form-label">Requerente</label>
-                                <input type="text" class="form-control" id="requerente" name="requerente" required>
+                                <input type="text" class="form-control" id="requerente" name="requerente" value="{{ request.POST.requerente }}" required>
                             </div>
                             <div class="mb-3">
                                 <label for="vinculo" class="form-label">Vínculo</label>
-                                <input type="text" class="form-control" id="vinculo" name="vinculo" required>
+                                <input type="text" class="form-control" id="vinculo" name="vinculo" value="{{ request.POST.vinculo }}" required>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="mb-3">
                                 <label for="usuario_nome" class="form-label">Responsável</label>
-                                <input type="text" class="form-control" id="responsavel" name="responsavel" required>
+                                <label for="">{{ usuario_logado.get_full_name|default:usuario_logado.username }}</label>
                             </div>
                             <div class="mb-3">
                                 <label for="data_entrega" class="form-label">Data de entrega</label>
-                                <input type="date" class="form-control" id="data_entrega" name="dataDevolucao" required>
+                                {{ form.dataDevolucao }}
                             </div>
                             <div class="mb-3">
                                 <label for="matricula" class="form-label">Matrícula</label>
-                                <input type="text" class="form-control" id="matricula" name="matricula" required>
+                                <input type="text" class="form-control" id="matricula" name="matricula" value="{{ request.POST.matricula }}" required>
                             </div>
                             <div class="mb-3">
                                 <label for="turma_disciplina" class="form-label">Turma ou Disciplina</label>
-                                <input type="text" class="form-control" id="turma_disciplina" name="turma_disciplina"
+                                <input type="text" class="form-control" id="turma_disciplina" name="turma_disciplina" value="{{ request.POST.turma_disciplina }}"
                                     required>
                             </div>
                         </div>

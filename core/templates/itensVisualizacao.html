@@ -7,66 +7,74 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-1">
-                <div><a href="{% url 'itensCadastro' %}" class="botao">Cadastrar itens</a></div>
-            </div>
-            <div class="col-10">
-                <h2>Lista de Itens Devolutivos</h2>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Nome do Item</th>
-                            <th>Marca</th>
-                            <th>Tipo do Item</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for item in devolutivos %}
-                        <tr>
-                            <td>{{ item.nome }}</td>
-                            <td>{{ item.marca }}</td>
-                            <td>{{ item.tipoProduto }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-1">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-1">
+            <div><a href="{% url 'itensCadastro' %}" class="botao">Cadastrar itens</a></div>
+        </div>
+        <div class="col-10">
+            <h2>Lista de Itens Devolutivos</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nome do Item</th>
+                        <th>Marca</th>
+                        <th>Tipo do Item</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in devolutivos %}
+                    <tr>
+                        <td>{{ item.nome }}</td>
+                        {% if item.marca %}
+                        <td>{{ item.marca }}</td>
+                        {% else %}
+                        <td>-</td>
+                        {% endif %}
+                        <td>{{ item.tipoProduto }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-1">
 
-            </div>
         </div>
     </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-1">
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-1">
 
-            </div>
-            <div class="col-10">
-                <h2>Lista de Itens Não Devolutivos</h2>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Nome do Item</th>
-                            <th>Marca</th>
-                            <th>Tipo do Item</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for item in nao_devolutivos %}
-                        <tr>
-                            <td>{{ item.nome }}</td>
-                            <td>{{ item.marca }}</td>
-                            <td>{{ item.tipoProduto }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-1">
+        </div>
+        <div class="col-10">
+            <h2>Lista de Itens Não Devolutivos</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nome do Item</th>
+                        <th>Marca</th>
+                        <th>Tipo do Item</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in nao_devolutivos %}
+                    <tr>
+                        <td>{{ item.nome }}</td>
+                        {% if item.marca %}
+                        <td>{{ item.marca }}</td>
+                        {% else %}
+                        <td></td>
+                        {% endif %}
+                        <td>{{ item.tipoProduto }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-1">
 
-            </div>
         </div>
     </div>
+</div>
 {% endblock %}

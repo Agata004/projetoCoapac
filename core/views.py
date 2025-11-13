@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.db import IntegrityError
+from django.db import IntegrityError, transaction
 from django.contrib import messages
 from .models import ComunidadeEscolar, Usuarios, TipoProduto, Produtos, Emprestimo
 from .forms import UsuariosForm, TipoProdutoForm, EmprestimoForm, ProdutosForm
@@ -33,50 +33,82 @@ def base(request):
 
 # Empréstimo
 def emprestimo(request):
+    if not request.user.is_authenticated:
+        messages.error(request, "Você precisa estar logado para registrar empréstimos.")
+        return redirect('login')  # ajuste para sua rota de login
+
     if request.method == 'POST':
         form = EmprestimoForm(request.POST)
         if form.is_valid():
-            produto_nome = request.POST.get('produtos')
-            produto = Produtos.objects.get(nome=produto_nome)
+            # campos vindos do formulário HTML (requerente)
+            requerente_nome = request.POST.get('requerente', '').strip()
+            matricula = request.POST.get('matricula', '').strip()
+            vinculo = request.POST.get('vinculo', '').strip()
+            turma = request.POST.get('turma_disciplina', '').strip()
 
-            usuario = request.user  # usuário logado
+            # pega o produto selecionado
+            produto = form.cleaned_data.get('produtos')
+            if not produto:
+                form.add_error('produtos', 'Selecione um produto válido.')
+                # volta ao template com erros
+                return render(request, 'emprestimo.html', {'form': form, 'usuario_logado': request.user})
+            
+            if Emprestimo.objects.filter(produtos=produto, entregue=False).exists():
+                form.add_error('produtos', 'Este produto já está emprestado e não foi devolvido.')
+                # volta ao template com erros
+                return render(request, 'emprestimo.html', {'form': form, 'usuario_logado': request.user})
 
-            comunidade_nome = request.POST.get('requerente')
-            comunidade_matricula = request.POST.get('matricula')
-            comunidade_vinculo = request.POST.get('vinculo')
-            comunidade_turma = request.POST.get('turma_disciplina')
+            # usa transação para evitar corrida que crie duplicatas da Comunidade
+            try:
+                with transaction.atomic():
 
-            comunidade, created = ComunidadeEscolar.objects.get_or_create(
-                matricula=comunidade_matricula,
-                defaults={
-                    'nome': comunidade_nome,
-                    'vinculo': comunidade_vinculo,
-                    'turmaouDisciplina': comunidade_turma
-                }
-            )
-            if not created:
-                comunidade.nome = comunidade_nome
-                comunidade.vinculo = comunidade_vinculo
-                comunidade.turmaouDisciplina = comunidade_turma
-                comunidade.save()
+                    # get_or_create por matrícula
+                    if matricula:
+                        comunidade, created = ComunidadeEscolar.objects.get_or_create(
+                            matricula=matricula,
+                            defaults={
+                                'nome': requerente_nome,
+                                'vinculo': vinculo,
+                                'turmaouDisciplina': turma
+                            }
+                        )
+                        # se já existia, atualiza campos se necessário
+                        if not created:
+                            updated = False
+                            if requerente_nome and comunidade.nome != requerente_nome:
+                                comunidade.nome = requerente_nome
+                                updated = True
+                            if vinculo and comunidade.vinculo != vinculo:
+                                comunidade.vinculo = vinculo
+                                updated = True
+                            if turma and comunidade.turmaouDisciplina != turma:
+                                comunidade.turmaouDisciplina = turma
+                                updated = True
+                            if updated:
+                                comunidade.save()
+                    else:
+                        form.add_error('matricula', 'Matrícula é obrigatória.')
+                        return render(request, 'emprestimo.html', {'form': form, 'usuario_logado': request.user})
 
-            emprestimo = form.save(commit=False)
-            emprestimo.produtos = produto
-            emprestimo.usuarios = usuario
-            emprestimo.comunidadeEscolar = comunidade
-            emprestimo.save()
+                    # cria o empréstimo sem commitar ainda
+                    emprestimo = form.save(commit=False)
+                    emprestimo.produtos = produto
+                    emprestimo.usuarios = request.user
+                    emprestimo.comunidadeEscolar = comunidade
+                    emprestimo.save()
 
-            messages.success(request, 'Empréstimo cadastrado com sucesso!')
-            return redirect('inicial')
+                messages.success(request, 'Empréstimo cadastrado com sucesso!')
+                return redirect('inicial')
+            except Exception as e:
+                # captura erros inesperados
+                form.add_error(None, f'Erro ao salvar empréstimo: {e}')
     else:
         form = EmprestimoForm()
-    
+
     contexto = {
         'form': form,
-        'editar': False,
         'usuario_logado': request.user
     }
-
     return render(request, 'emprestimo.html', contexto)
 
 
@@ -192,15 +224,24 @@ def usuariosCadastro(request):
     return render(request, 'usuariosCadastro.html', contexto)
 
 def usuarios_editar(request, credencial):
-    usuarios = Usuarios.objects.get(credencial=credencial)
+    usuarios = get_object_or_404(Usuarios, credencial=credencial)
     form = UsuariosForm(request.POST or None, instance=usuarios)
-    if form.is_valid():
-        form.save()
-        messages.success(request, 'Usuário atualizado com sucesso.')
-        return redirect('usuariosVisualizacao')
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Usuário atualizado com sucesso.')
+            return redirect('usuariosVisualizacao')
+    else:
+        # Preenche manualmente os valores no contexto (sem alterar estrutura principal)
+        contexto = {
+            'form': form,
+            'editar': True
+        }
+        return render(request, 'usuariosCadastro.html', contexto)
     
     contexto = {
-        'form': form
+        'form': form,
+        'editar': True
     }
     return render(request, 'usuariosCadastro.html', contexto)
 

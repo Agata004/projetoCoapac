@@ -1,7 +1,7 @@
 from django.db import models
 
 class ComunidadeEscolar(models.Model):
-    matricula = models.IntegerField('Matrícula', primary_key=True)
+    matricula = models.IntegerField('Matrícula', primary_key=True, unique=True)
     nome = models.CharField('Nome', max_length=100)
     vinculo = models.CharField('Vínculo', max_length=50)
     turmaouDisciplina = models.CharField('Turma ou Disciplina', max_length=50)
@@ -32,7 +32,7 @@ class TipoProduto(models.Model):
 
 class Produtos(models.Model):
     nome = models.CharField('Produto', max_length=100)
-    marca = models.CharField('Marca', max_length=50, null=True)
+    marca = models.CharField('Marca', max_length=50, null=True, blank=True)
     devo_ou_nao = models.BooleanField('Devolutivo ou não', default=False)
     tipoProduto = models.ForeignKey(TipoProduto, on_delete=models.PROTECT)
     def __str__(self):
@@ -41,7 +41,8 @@ class Produtos(models.Model):
 class Emprestimo(models.Model):
     idEmprestimo = models.AutoField('Empréstimo', primary_key=True)
     dataSaida = models.DateField('Data de Saída', null=True)  # permitir nulo temporariamente
-    dataDevolucao = models.DateField('Data de Devolução', null=True)  # permitir nulo temporariamente
+    dataDevolucao = models.DateField('Data de Devolução', null=True, blank=True)  # permitir nulo temporariamente
+    entregue = models.BooleanField('Entregue', default=False)
     produtos = models.ForeignKey(Produtos, on_delete=models.PROTECT, null=True)  # permitir nulo temporariamente
     comunidadeEscolar = models.ForeignKey(ComunidadeEscolar, on_delete=models.PROTECT, null=True)  # permitir nulo temporariamente
     usuarios = models.ForeignKey(Usuarios, on_delete=models.PROTECT, null=True)  # permitir nulo temporariamente

@@ -19,16 +19,22 @@
             <form method="post">
                 {% csrf_token %}
                 <h2>Cadastro de Empréstimo</h2>
+
+                {% if usuario_logado.is_authenticated %}
+                <div class="alert alert-info" role="alert">
+                    <strong>Responsável:</strong> {{ usuario_logado.get_full_name|default:usuario_logado.username }}
+                </div>
+                {% endif %}
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-6">
                             <div class="mb-3">
-                                <label for="produto" class="form-label">Produto</label>
-                                <input type="text" class="form-control" id="produto" name="produto" required>
+                                <label for="{{ form.produtos.id_for_label }}" class="form-label">Produto</label>
+                                {{ form.produtos }}
                             </div>
                             <div class="mb-3">
                                 <label for="data_saida" class="form-label">Data de saída</label>
-                                <input type="date" class="form-control" id="data_saida" name="data_saida" required>
+                                <input type="date" class="form-control" id="data_saida" name="dataSaida" required>
                             </div>
                             <div class="mb-3">
                                 <label for="requerente" class="form-label">Requerente</label>
@@ -41,19 +47,19 @@
                         </div>
                         <div class="col-6">
                             <div class="mb-3">
-                                <label for="responsavel" class="form-label">Responsável</label>
+                                <label for="usuario_nome" class="form-label">Responsável</label>
                                 <input type="text" class="form-control" id="responsavel" name="responsavel" required>
                             </div>
                             <div class="mb-3">
                                 <label for="data_entrega" class="form-label">Data de entrega</label>
-                                <input type="date" class="form-control" id="data_entrega" name="data_entrega" required>
+                                <input type="date" class="form-control" id="data_entrega" name="dataDevolucao" required>
                             </div>
                             <div class="mb-3">
                                 <label for="matricula" class="form-label">Matrícula</label>
                                 <input type="text" class="form-control" id="matricula" name="matricula" required>
                             </div>
                             <div class="mb-3">
-                                <label for="turma_disciplina" class="form-label">Turma ou disciplina</label>
+                                <label for="turma_disciplina" class="form-label">Turma ou Disciplina</label>
                                 <input type="text" class="form-control" id="turma_disciplina" name="turma_disciplina"
                                     required>
                             </div>

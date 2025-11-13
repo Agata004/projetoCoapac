@@ -32,4 +32,7 @@ class ProdutosForm(forms.ModelForm):
 class EmprestimoForm(forms.ModelForm):
     class Meta:
         model = Emprestimo
-        fields = ['dataSaida', 'dataDevolucao', 'comunidadeEscolar', 'usuarios']
+        fields = ['dataSaida', 'dataDevolucao', 'comunidadeEscolar', 'usuarios', 'produtos']
+        widgets = {
+            'produtos': forms.Select(attrs={'class': 'form-select'}),
+        }

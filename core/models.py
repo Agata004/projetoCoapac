@@ -42,6 +42,6 @@ class Emprestimo(models.Model):
     idEmprestimo = models.AutoField('Empréstimo', primary_key=True)
     dataSaida = models.DateField('Data de Saída', null=True)  # permitir nulo temporariamente
     dataDevolucao = models.DateField('Data de Devolução', null=True)  # permitir nulo temporariamente
-    # produtos = models.ForeignKey(Produtos, on_delete=models.PROTECT, null=True)  # permitir nulo temporariamente
+    produtos = models.ForeignKey(Produtos, on_delete=models.PROTECT, null=True)  # permitir nulo temporariamente
     comunidadeEscolar = models.ForeignKey(ComunidadeEscolar, on_delete=models.PROTECT, null=True)  # permitir nulo temporariamente
     usuarios = models.ForeignKey(Usuarios, on_delete=models.PROTECT, null=True)  # permitir nulo temporariamente

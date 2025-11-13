@@ -36,58 +36,49 @@ def emprestimo(request):
     if request.method == 'POST':
         form = EmprestimoForm(request.POST)
         if form.is_valid():
-            try:
-                # Trata produto
-                #produto_nome = request.POST.get('produtos')
-                #produto = Produtos.objects.get(nome=produto_nome)
+            produto_nome = request.POST.get('produtos')
+            produto = Produtos.objects.get(nome=produto_nome)
 
-                # Trata usuário responsável
-                usuario_nome = request.POST.get('usuarios')
-                usuario = Usuarios.objects.get(nome=usuario_nome)
+            usuario = request.user  # usuário logado
 
-                # Trata comunidade escolar: cria se não existir
-                comunidade_nome = request.POST.get('comunidadeEscolar')
-                comunidade_matricula = request.POST.get('matricula')
-                comunidade_vinculo = request.POST.get('vinculo')
-                comunidade_turma = request.POST.get('turma_disciplina')
+            comunidade_nome = request.POST.get('requerente')
+            comunidade_matricula = request.POST.get('matricula')
+            comunidade_vinculo = request.POST.get('vinculo')
+            comunidade_turma = request.POST.get('turma_disciplina')
 
-                comunidade, created = ComunidadeEscolar.objects.get_or_create(
-                    matricula=comunidade_matricula,
-                    defaults={
-                        'nome': comunidade_nome,
-                        'vinculo': comunidade_vinculo,
-                        'turmaouDisciplina': comunidade_turma
-                    }
-                )
-                # Se já existia, atualiza os campos caso queira manter consistência
-                if not created:
-                    comunidade.nome = comunidade_nome
-                    comunidade.vinculo = comunidade_vinculo
-                    comunidade.turmaouDisciplina = comunidade_turma
-                    comunidade.save()
+            comunidade, created = ComunidadeEscolar.objects.get_or_create(
+                matricula=comunidade_matricula,
+                defaults={
+                    'nome': comunidade_nome,
+                    'vinculo': comunidade_vinculo,
+                    'turmaouDisciplina': comunidade_turma
+                }
+            )
+            if not created:
+                comunidade.nome = comunidade_nome
+                comunidade.vinculo = comunidade_vinculo
+                comunidade.turmaouDisciplina = comunidade_turma
+                comunidade.save()
 
-                # Cria o empréstimo
-                emprestimo = form.save(commit=False)
-                #emprestimo.produtos = produto
-                emprestimo.usuarios = usuario
-                emprestimo.comunidadeEscolar = comunidade
-                emprestimo.save()
+            emprestimo = form.save(commit=False)
+            emprestimo.produtos = produto
+            emprestimo.usuarios = usuario
+            emprestimo.comunidadeEscolar = comunidade
+            emprestimo.save()
 
-                messages.success(request, 'Empréstimo cadastrado com sucesso!')
-                return redirect('inicial')
-
-            #except Produtos.DoesNotExist:
-            #    messages.error(request, f'O produto "{produto_nome}" não foi encontrado. Por favor, verifique o nome do produto.')
-            except Usuarios.DoesNotExist:
-                messages.error(request, f'O usuário "{usuario_nome}" não foi encontrado. Por favor, verifique o nome do usuário.')
-            except Exception as e:
-                messages.error(request, f'Ocorreu um erro inesperado: {str(e)}')
-        else:
-            messages.error(request, 'Erro ao validar o formulário. Por favor, verifique os dados inseridos.')
+            messages.success(request, 'Empréstimo cadastrado com sucesso!')
+            return redirect('inicial')
     else:
         form = EmprestimoForm()
+    
+    contexto = {
+        'form': form,
+        'editar': False,
+        'usuario_logado': request.user
+    }
 
-    return render(request, 'emprestimo.html', {'form': form, 'editar': False})
+    return render(request, 'emprestimo.html', contexto)
+
 
 def inicial(request):
     emprestimos = Emprestimo.objects.select_related('produtos', 'usuarios', 'comunidadeEscolar')

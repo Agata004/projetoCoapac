@@ -97,23 +97,29 @@ def inicial(request):
     return render(request, 'inicial.html', contexto)
 
 # Itens/Produtos
+def itensVisualizacao(request):
+    devolutivos = Produtos.objects.filter(devo_ou_nao=True)
+    nao_devolutivos = Produtos.objects.filter(devo_ou_nao=False)
+
+    contexto = {
+        'devolutivos': devolutivos,
+        'nao_devolutivos': nao_devolutivos
+    }
+    return render(request, 'itensVisualizacao.html', contexto)
+
 def itensCadastro(request):
     form = ProdutosForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        messages.success(request, 'Item cadastrado com sucesso.')
-        return redirect('itensVisualizacao')
+    
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Item cadastrado com sucesso.')
+            return redirect('itensVisualizacao')
+    
     contexto = {
         'form': form
     }
     return render(request, 'itensCadastro.html', contexto)
-
-def itensVisualizacao(request):
-    itens = Produtos.objects.all()
-    contexto = {
-        'itens': itens
-    }
-    return render(request, 'itensVisualizacao.html', contexto)
 
 # Tipo de Itens/Produtos
 def tipoItensVisualizacao(request):

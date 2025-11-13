@@ -11,37 +11,34 @@
         <div class="row">
             <div class="col-4">
                 <div><a href="{% url 'itensVisualizacao' %}" class="botao">Itens cadastrados</a></div>
-                <div><a href="{% url 'tipoItensVisualizacao' %}" class="botao">Tipos de itens</a></div>
             </div>
             <div class="col-4">
                 <form method="post">
                     {% csrf_token %}
                     <h2 style="text-align: center;">Cadastro de Itens</h2>
+                  
                     <div class="mb-3">
-                        <label for="nome_item" class="form-label">Nome do Item</label>
-                        <input type="text" class="form-control" id="nome" name="nome" required>
+                      <label for="{{ form.nome.id_for_label }}" class="form-label">Nome do Item:</label><br>
+                      {{ form.nome }}
                     </div>
+                  
                     <div class="mb-3">
-                        <label for="marca_item" class="form-label">Marca do Item</label>
-                        <input type="text" class="form-control" id="marca" name="marca" required>
+                      <label for="{{ form.marca.id_for_label }}" class="form-label">Marca do Item</label><br>
+                      {{ form.marca }}
                     </div>
+                  
                     <div class="mb-3">
-                        <label for="Tipo_produto" class="form-label">Tipo do Produto</label>
-                        <select class="form-select" id="tipoProduto" name="tipoProduto" required>
-                            <option value="">Selecione o Tipo do Produto</option>
-                            <option value="livro">Livro</option>
-                            <option value="material_didatico">Material Didático</option>
-                            <option value="equipamento">Equipamento</option>
-                        </select>
+                      <label for="{{ form.tipoProduto.id_for_label }}" class="form-label">Tipo do Produto</label>
+                      {{ form.tipoProduto }}
                     </div>
+                  
                     <div class="mb-3">
-                        <input type="radio" id="devolutivo" name="tipo_item" value="devolutivo">
-                        <label for="devolutivo">Devolutivo</label>
-                        <input type="radio" id="nao_devolutivo" name="tipo_item" value="nao_devolutivo">
-                        <label for="nao_devolutivo">Não Devolutivo</label>
+                      <label class="form-label">Marque se o produto é devolutivo ou não</label><br>
+                      {{ form.devo_ou_nao }}
                     </div>
+                  
                     <button type="submit" class="btn btn-primary">Cadastrar Item</button>
-                </form>
+                  </form>
             <div class="col-4">
 
             </div>

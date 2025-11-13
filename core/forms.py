@@ -25,7 +25,7 @@ class ProdutosForm(forms.ModelForm):
         model = Produtos
         fields = ['nome', 'marca', 'tipoProduto', 'devo_ou_nao']
         widgets = {
-            'tipoProduto': forms.Select(),
+            'tipoProduto': forms.Select(attrs={'class': 'form-select'}),
             'devo_ou_nao': forms.RadioSelect(choices=[(True, 'Devolutivo'), (False, 'Não Devolutivo')])
         }
 

@@ -38,9 +38,8 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="codigo" class="form-label">Tipo de item</label>
-                    <input type="text" class="form-control" id="codigo" name="codigo" value="{{ codigo|default:'' }}" {%
-                        if nome %}readonly{% endif %} required>
+                    <label for="codigo" class="form-label">Código do item</label>
+                    <input type="text" class="form-control" id="codigo" name="codigo" value="{{ codigo|default:'' }}" {% if nome %} readonly {% endif %} required>
                 </div>
 
                 <button type="submit" class="btn btn-primary">

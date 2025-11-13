@@ -34,7 +34,7 @@ class Produtos(models.Model):
     nome = models.CharField('Produto', max_length=100)
     marca = models.CharField('Marca', max_length=50, null=True)
     devo_ou_nao = models.BooleanField('Devolutivo ou não', default=False)
-    tipoProduto = models.ForeignKey(TipoProduto, on_delete=models.PROTECT, to_field='codigo')
+    tipoProduto = models.ForeignKey(TipoProduto, on_delete=models.PROTECT)
     def __str__(self):
         return f"{self.nome} ({self.tipoProduto.nome})"
 

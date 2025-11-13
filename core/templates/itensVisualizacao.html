@@ -11,7 +11,6 @@
         <div class="row">
             <div class="col-1">
                 <div><a href="{% url 'itensCadastro' %}" class="botao">Cadastrar itens</a></div>
-                <div><a href="{% url 'tipoItensVisualizacao' %}" class="botao">Tipos de itens</a></div>
             </div>
             <div class="col-10">
                 <h2>Lista de Itens Devolutivos</h2>
@@ -20,15 +19,15 @@
                         <tr>
                             <th>Nome do Item</th>
                             <th>Marca</th>
-                            <th>Descrição</th>
+                            <th>Tipo do Item</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for item in itens %}
+                        {% for item in devolutivos %}
                         <tr>
                             <td>{{ item.nome }}</td>
-                            <td>{{ item.quantidade }}</td>
-                            <td>{{ item.descricao }}</td>
+                            <td>{{ item.marca }}</td>
+                            <td>{{ item.tipoProduto }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -50,16 +49,16 @@
                     <thead>
                         <tr>
                             <th>Nome do Item</th>
-                            <th>Quantidade</th>
-                            <th>Descrição</th>
+                            <th>Marca</th>
+                            <th>Tipo do Item</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for item in itens %}
+                        {% for item in nao_devolutivos %}
                         <tr>
-                            <td>{{ item.nome_item }}</td>
-                            <td>{{ item.quantidade }}</td>
-                            <td>{{ item.descricao }}</td>
+                            <td>{{ item.nome }}</td>
+                            <td>{{ item.marca }}</td>
+                            <td>{{ item.tipoProduto }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>

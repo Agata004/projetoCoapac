@@ -172,7 +172,7 @@ def itensDelete(request, id):
     if request.method == 'POST':
         item.delete()
         return redirect('itensVisualizacao')
-
+    
     contexto = {
         'item': item
     }
@@ -232,10 +232,14 @@ def tipoItensEditar(request, codigo):
 
 def tipoItensDelete(request, codigo):
     tipos = get_object_or_404(TipoProduto, codigo=codigo)
+
     if request.method == 'POST':
         tipos.delete()
-        messages.success(request, 'Tipo de produto excluído com sucesso.', extra_tags='exclusao')
-    return redirect('tipoItensVisualizacao')
+        return redirect('tipoItensVisualizacao')
+    contexto = {
+        'tipos': tipos
+    }
+    return render(request, 'tipoItens_confirm_delete.html', contexto)
 
 # Usuários
 def usuariosVisualizacao(request):

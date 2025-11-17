@@ -10,7 +10,7 @@ class UsuariosForm(forms.ModelForm):
         
     def save(self, commit=True):
         usuario = super().save(commit=False)
-        usuario.set_password(self.cleaned_data['senha'])
+        usuario.senha = self.cleaned_data['senha']
         if commit:
             usuario.save()
         return usuario

@@ -13,7 +13,7 @@ def index(request):
             # Tenta encontrar um usuário pela credencial
             usuario = Usuarios.objects.get(credencial=login)
             # Verifica se a senha está correta
-            if usuario.check_password(senha):
+            if usuario.senha == senha:
                 # Se a senha está correta, verifica se é admin (credencial 1)
                 if int(login) == 412365:
                     return redirect('usuariosVisualizacao')

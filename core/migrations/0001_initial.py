@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('credencial', models.IntegerField(primary_key=True, serialize=False, verbose_name='Credencial')),
                 ('nome', models.CharField(max_length=100, verbose_name='Usuário')),
-                ('senha', models.CharField(max_length=128, verbose_name='Senha')),
+                ('senha', models.CharField(max_length=8, verbose_name='Senha')),
             ],
         ),
         migrations.CreateModel(

@@ -144,6 +144,40 @@ def itensCadastro(request):
     }
     return render(request, 'itensCadastro.html', contexto)
 
+def itensEditar(request, id):
+    itens = get_object_or_404(Produtos, id=id)
+    form = ProdutosForm(request.POST or None, instance=itens)
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('itensVisualizacao')
+    else:
+        # Preenche manualmente os valores no contexto (sem alterar estrutura principal)
+        contexto = {
+            'form': form,
+            'editar': True
+        }
+        return render(request, 'itensCadastro.html', contexto)
+    
+    contexto = {
+        'form': form,
+        'editar': True
+    }
+    return render(request, 'itensCadastro.html', contexto)
+
+def itensDelete(request, id):
+    item = get_object_or_404(Produtos, id=id)
+
+    if request.method == 'POST':
+        item.delete()
+        return redirect('itensVisualizacao')
+
+    contexto = {
+        'item': item
+    }
+    return render(request, 'itens_confirm_delete.html', contexto)
+
 # Tipo de Itens/Produtos
 def tipoItensVisualizacao(request):
     tipos = TipoProduto.objects.all()

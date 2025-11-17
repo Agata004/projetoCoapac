@@ -20,6 +20,7 @@
                         <th>Nome do Item</th>
                         <th>Marca</th>
                         <th>Tipo do Item</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,6 +33,10 @@
                         <td>-</td>
                         {% endif %}
                         <td>{{ item.tipoProduto }}</td>
+                        <td>
+                            <a href="{% url 'itensEditar' item.id %}" class="btn btn-warning">Editar</a>
+                            <a href="{% url 'itensDelete' item.id %}" class="btn btn-danger">Excluir</a>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -55,6 +60,7 @@
                         <th>Nome do Item</th>
                         <th>Marca</th>
                         <th>Tipo do Item</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -64,9 +70,13 @@
                         {% if item.marca %}
                         <td>{{ item.marca }}</td>
                         {% else %}
-                        <td></td>
+                        <td>-</td>
                         {% endif %}
                         <td>{{ item.tipoProduto }}</td>
+                        <td>
+                            <a href="{% url 'itensEditar' item.id %}" class="btn btn-warning">Editar</a>
+                            <a href="{% url 'itensDelete' item.id %}" class="btn btn-danger">Excluir</a>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>

@@ -1,11 +1,38 @@
 from django import forms
 from .models import Usuarios, TipoProduto, Produtos, Emprestimo
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 class UsuariosForm(UserCreationForm):
     class Meta:
         model = Usuarios
-        fields = ['credencial', 'username', 'nome', 'password1', 'password2']
+        fields = ['credencial', 'username', 'nome']
+
+class UsuariosEditForm(UserChangeForm):
+    password = None  # esconde o campo password padrão do UserChangeForm
+    password1 = forms.CharField(label='Senha', widget=forms.PasswordInput, required=False)
+    password2 = forms.CharField(label='Confirmação de senha', widget=forms.PasswordInput, required=False)
+
+    class Meta:
+        model = Usuarios
+        fields = ['credencial', 'username', 'nome']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Torna credencial somente leitura
+        self.fields['credencial'].disabled = True
+
+    def clean_credencial(self):
+        # Garante que a credencial original não seja alterada
+        return self.instance.credencial
+
+    def clean(self):
+        cleaned_data = super().clean()
+        senha = cleaned_data.get('password1')
+        senha2 = cleaned_data.get('password2')
+        if senha or senha2:
+            if senha != senha2:
+                self.add_error('password2', "As senhas não coincidem.")
+        return cleaned_data
 
 
 class TipoProdutoForm(forms.ModelForm):

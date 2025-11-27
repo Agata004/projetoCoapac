@@ -2,17 +2,17 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.db import IntegrityError, transaction
 from django.contrib import messages
 from .models import ComunidadeEscolar, Usuarios, TipoProduto, Produtos, Emprestimo
-from .forms import UsuariosForm, TipoProdutoForm, EmprestimoForm, ProdutosForm
+from .forms import UsuariosForm, UsuariosEditForm, TipoProdutoForm, EmprestimoForm, ProdutosForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 # Ordenar alfabeticamente para encontrar mais fácil
 def index(request):
     if request.method == 'POST':
-        credencial = request.POST.get('credencial')
+        credencial = request.POST.get('login')
         senha = request.POST.get('senha')   
         
-        user = authenticate(request, username=credencial, password=senha)
+        user = authenticate(request, credencial=credencial, password=senha)
 
         if user is not None:
             login(request, user)
@@ -250,38 +250,45 @@ def usuariosVisualizacao(request):
     return render(request, 'usuariosVisualizacao.html', contexto)
 
 def usuariosCadastro(request):
-    form = UsuariosForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        messages.success(request, 'Usuário cadastrado com sucesso.')
-        return redirect('usuariosVisualizacao')
+    form = UsuariosForm()
+    
+    if request.method == 'POST':
+        form = UsuariosForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Usuário cadastrado com sucesso!')
+            return redirect('usuariosVisualizacao')
+        else:
+            messages.error(request, 'Erro ao cadastrar usuário. Verifique os dados.')
     
     contexto = {
-        'form': form
+        'form': form,
+        'editar': False
     }
     return render(request, 'usuariosCadastro.html', contexto)
 
 def usuarios_editar(request, credencial):
-    usuarios = get_object_or_404(Usuarios, credencial=credencial)
-    form = UsuariosForm(request.POST or None, instance=usuarios)
+    usuario = get_object_or_404(Usuarios, credencial=credencial)
+
     if request.method == 'POST':
+        form = UsuariosEditForm(request.POST, instance=usuario)
         if form.is_valid():
-            form.save()
-            messages.success(request, 'Usuário atualizado com sucesso.')
+            usuario = form.save(commit=False)
+            senha = form.cleaned_data.get('password1')
+            if senha:
+                usuario.set_password(senha)  # salva a senha corretamente
+            usuario.save()
+            messages.success(request, "Usuário atualizado com sucesso!")
             return redirect('usuariosVisualizacao')
     else:
-        # Preenche manualmente os valores no contexto (sem alterar estrutura principal)
-        contexto = {
-            'form': form,
-            'editar': True
-        }
-        return render(request, 'usuariosCadastro.html', contexto)
+        form = UsuariosEditForm(instance=usuario)
     
     contexto = {
-        'form': form,
+        'form': form, 
         'editar': True
     }
-    return render(request, 'usuariosCadastro.html', contexto)
+
+    return render(request, 'usuarios_editar.html', contexto)
 
 def usuarios_delete(request, credencial):
     usuarios = get_object_or_404(Usuarios, credencial=credencial)

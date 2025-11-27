@@ -8,7 +8,7 @@ class ComunidadeEscolar(models.Model):
     turmaouDisciplina = models.CharField('Turma ou Disciplina', max_length=50)
 
 class Usuarios(AbstractUser):
-    credencial = models.IntegerField('Credencial', primary_key=True)
+    credencial = models.CharField('Credencial', primary_key=True)
     nome = models.CharField('Usuário', max_length=100)
 
     USERNAME_FIELD = 'credencial'

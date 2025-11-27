@@ -13,6 +13,7 @@
             <div><a href="{% url 'usuariosCadastro' %}" class="botao">Cadastrar Usuário</a></div>
             <div><a href="{% url 'tipoItensVisualizacao' %}" class="botao">Tipos de Itens</a></div>
             <div><a href="{% url 'tipoItensCadastro' %}" class="botao">Cadastrar Tipo de Item</a></div>
+            <div><a href="{% url 'desconectar' %}" class="botao">Desconectar</a></div>
         </div>
         <div style="padding: 0 30px; text-align: center;" class="col-12 col-sm-8 col-md-8 col-lg-10">
             <h2>Lista de Usuários</h2>
@@ -21,6 +22,7 @@
                     <tr>
                         <th>Credencial</th>
                         <th>Nome</th>
+                        <th>Nome de usuário</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -29,6 +31,7 @@
                     <tr>
                         <td>{{ u.credencial }}</td>
                         <td>{{ u.nome }}</td>
+                        <td>{{ u.username }}</td>
                         <td>
                             <a href="{% url 'usuariosEditar' u.credencial %}" class="btn btn-warning">Editar</a>
                             <a href="{% url 'usuariosDelete' u.credencial %}" class="btn btn-danger">Excluir</a>

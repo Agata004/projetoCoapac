@@ -3,30 +3,30 @@ from django.db import IntegrityError, transaction
 from django.contrib import messages
 from .models import ComunidadeEscolar, Usuarios, TipoProduto, Produtos, Emprestimo
 from .forms import UsuariosForm, TipoProdutoForm, EmprestimoForm, ProdutosForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 # Ordenar alfabeticamente para encontrar mais fácil
 def index(request):
     if request.method == 'POST':
-        login = request.POST.get('login')
+        credencial = request.POST.get('credencial')
         senha = request.POST.get('senha')   
-        try:
-            # Tenta encontrar um usuário pela credencial
-            usuario = Usuarios.objects.get(credencial=login)
-            # Verifica se a senha está correta
-            if usuario.senha == senha:
-                # Se a senha está correta, verifica se é admin (credencial 1)
-                if int(login) == 412365:
-                    return redirect('usuariosVisualizacao')
-                else:
-                    return redirect('inicial')
-            else:
-                # Senha incorreta
-                return render(request, 'index.html', {'toast': 'Credencial ou senha inválidos.'})
-                
-        except Usuarios.DoesNotExist:
-            # Se não encontrou o usuário, retorna para o index com mensagem de erro
+        
+        user = authenticate(request, username=credencial, password=senha)
+
+        if user is not None:
+            login(request, user)
+
+            if user.is_superuser:
+                return redirect('usuariosVisualizacao')
+            return redirect('inicial')
+        else:
             return render(request, 'index.html', {'toast': 'Credencial ou senha inválidos.'})
     return render(request, 'index.html')
+
+def desconectar(request):
+    logout(request)
+    return redirect('index')
 
 def base(request):
     return render(request, 'base.html')
@@ -35,7 +35,7 @@ def base(request):
 def emprestimo(request):
     if not request.user.is_authenticated:
         messages.error(request, "Você precisa estar logado para registrar empréstimos.")
-        return redirect('login')  # ajuste para sua rota de login
+        return redirect('index')
 
     if request.method == 'POST':
         form = EmprestimoForm(request.POST)
@@ -111,7 +111,7 @@ def emprestimo(request):
     }
     return render(request, 'emprestimo.html', contexto)
 
-
+@login_required
 def inicial(request):
     emprestimos = Emprestimo.objects.select_related('produtos', 'usuarios', 'comunidadeEscolar')
     contexto = {

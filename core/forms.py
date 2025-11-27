@@ -1,19 +1,12 @@
 from django import forms
 from .models import Usuarios, TipoProduto, Produtos, Emprestimo
+from django.contrib.auth.forms import UserCreationForm
 
-class UsuariosForm(forms.ModelForm):
-    senha = forms.CharField(widget=forms.PasswordInput)
-    
+class UsuariosForm(UserCreationForm):
     class Meta:
         model = Usuarios
-        fields = ['credencial', 'nome', 'senha']
-        
-    def save(self, commit=True):
-        usuario = super().save(commit=False)
-        usuario.senha = self.cleaned_data['senha']
-        if commit:
-            usuario.save()
-        return usuario
+        fields = ['credencial', 'username', 'nome', 'password1', 'password2']
+
 
 class TipoProdutoForm(forms.ModelForm):
     class Meta:

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index, base, inicial, emprestimo
+from .views import index, base, inicial, emprestimo, desconectar
 from .views import usuariosCadastro, usuariosVisualizacao, usuarios_editar, usuarios_delete  
 from .views import itensCadastro, itensVisualizacao, itensEditar, itensDelete
 from .views import tipoItensEditar, tipoItensDelete, tipoItensVisualizacao, tipoItensCadastro
@@ -21,4 +21,5 @@ urlpatterns = [
     path('usuariosVisualizacao/', usuariosVisualizacao, name='usuariosVisualizacao'),
     path('usuariosCadastro/<int:credencial>/', usuarios_editar, name='usuariosEditar'),
     path('usuariosVisualizacao/<int:credencial>/', usuarios_delete, name='usuariosDelete'),
+    path('desconectar/', desconectar, name='desconectar'),
 ]

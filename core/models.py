@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 class ComunidadeEscolar(models.Model):
     matricula = models.IntegerField('Matrícula', primary_key=True, unique=True)
@@ -6,10 +7,12 @@ class ComunidadeEscolar(models.Model):
     vinculo = models.CharField('Vínculo', max_length=50)
     turmaouDisciplina = models.CharField('Turma ou Disciplina', max_length=50)
 
-class Usuarios(models.Model):
+class Usuarios(AbstractUser):
     credencial = models.IntegerField('Credencial', primary_key=True)
     nome = models.CharField('Usuário', max_length=100)
-    senha = models.CharField('Senha', max_length=8)  # aumente o tamanho se quiser
+
+    USERNAME_FIELD = 'credencial'
+    REQUIRED_FIELDS = ['username', 'nome']
 
     def __str__(self):
         return self.nome 

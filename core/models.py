@@ -10,6 +10,7 @@ class ComunidadeEscolar(models.Model):
 class Usuarios(AbstractUser):
     credencial = models.CharField('Credencial', primary_key=True)
     nome = models.CharField('Usuário', max_length=100)
+    is_master = models.BooleanField('Master', default=False)
 
     USERNAME_FIELD = 'credencial'
     REQUIRED_FIELDS = ['username', 'nome']

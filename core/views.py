@@ -1,10 +1,10 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.db import IntegrityError, transaction
-from django.contrib import messages
 from .models import ComunidadeEscolar, Usuarios, TipoProduto, Produtos, Emprestimo
 from .forms import UsuariosForm, UsuariosEditForm, TipoProdutoForm, EmprestimoForm, ProdutosForm
+from django.db import IntegrityError, transaction
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
 
 # Ordenar alfabeticamente para encontrar mais fácil
 def index(request):
@@ -17,13 +17,14 @@ def index(request):
         if user is not None:
             login(request, user)
 
-            if user.is_superuser:
+            if user.is_master or user.is_superuser:
                 return redirect('usuariosVisualizacao')
             return redirect('inicial')
         else:
             return render(request, 'index.html', {'toast': 'Credencial ou senha inválidos.'})
     return render(request, 'index.html')
 
+@login_required
 def desconectar(request):
     logout(request)
     return redirect('index')
@@ -32,6 +33,7 @@ def base(request):
     return render(request, 'base.html')
 
 # Empréstimo
+@login_required
 def emprestimo(request):
     if not request.user.is_authenticated:
         messages.error(request, "Você precisa estar logado para registrar empréstimos.")
@@ -111,6 +113,10 @@ def emprestimo(request):
     }
     return render(request, 'emprestimo.html', contexto)
 
+def editar_emprestimo(request):
+    # Placeholder para futura implementação de edição de empréstimos
+    return render(request, 'editar_emprestimo.html')
+
 @login_required
 def inicial(request):
     emprestimos = Emprestimo.objects.select_related('produtos', 'usuarios', 'comunidadeEscolar')
@@ -120,6 +126,7 @@ def inicial(request):
     return render(request, 'inicial.html', contexto)
 
 # Itens/Produtos
+@login_required
 def itensVisualizacao(request):
     devolutivos = Produtos.objects.filter(devo_ou_nao=True)
     nao_devolutivos = Produtos.objects.filter(devo_ou_nao=False)
@@ -130,6 +137,7 @@ def itensVisualizacao(request):
     }
     return render(request, 'itensVisualizacao.html', contexto)
 
+@login_required
 def itensCadastro(request):
     form = ProdutosForm(request.POST or None)
     
@@ -144,6 +152,7 @@ def itensCadastro(request):
     }
     return render(request, 'itensCadastro.html', contexto)
 
+@login_required
 def itensEditar(request, id):
     itens = get_object_or_404(Produtos, id=id)
     form = ProdutosForm(request.POST or None, instance=itens)
@@ -166,6 +175,7 @@ def itensEditar(request, id):
     }
     return render(request, 'itensCadastro.html', contexto)
 
+@login_required
 def itensDelete(request, id):
     item = get_object_or_404(Produtos, id=id)
 
@@ -179,6 +189,7 @@ def itensDelete(request, id):
     return render(request, 'itens_confirm_delete.html', contexto)
 
 # Tipo de Itens/Produtos
+@login_required
 def tipoItensVisualizacao(request):
     tipos = TipoProduto.objects.all()
     contexto = {
@@ -186,6 +197,7 @@ def tipoItensVisualizacao(request):
     }
     return render(request, 'tipoItensVisualizacao.html', contexto)
 
+@login_required
 def tipoItensCadastro(request):
     form = TipoProdutoForm(request.POST or None)
     if request.method == 'POST':
@@ -205,6 +217,7 @@ def tipoItensCadastro(request):
     }
     return render(request, 'tipoItensCadastro.html', contexto)
 
+@login_required
 def tipoItensEditar(request, codigo):
     tipos = get_object_or_404(TipoProduto, codigo=codigo)
     form = TipoProdutoForm(request.POST or None, instance=tipos)
@@ -230,6 +243,7 @@ def tipoItensEditar(request, codigo):
     }
     return render(request, 'tipoItensCadastro.html', contexto)
 
+@login_required
 def tipoItensDelete(request, codigo):
     tipos = get_object_or_404(TipoProduto, codigo=codigo)
 
@@ -242,6 +256,7 @@ def tipoItensDelete(request, codigo):
     return render(request, 'tipoItens_confirm_delete.html', contexto)
 
 # Usuários
+@login_required
 def usuariosVisualizacao(request):
     usuarios = Usuarios.objects.all()
     contexto = {
@@ -249,6 +264,7 @@ def usuariosVisualizacao(request):
     }
     return render(request, 'usuariosVisualizacao.html', contexto)
 
+@login_required
 def usuariosCadastro(request):
     form = UsuariosForm()
     
@@ -267,6 +283,7 @@ def usuariosCadastro(request):
     }
     return render(request, 'usuariosCadastro.html', contexto)
 
+@login_required
 def usuarios_editar(request, credencial):
     usuario = get_object_or_404(Usuarios, credencial=credencial)
 
@@ -287,9 +304,9 @@ def usuarios_editar(request, credencial):
         'form': form, 
         'editar': True
     }
-
     return render(request, 'usuarios_editar.html', contexto)
 
+@login_required
 def usuarios_delete(request, credencial):
     usuarios = get_object_or_404(Usuarios, credencial=credencial)
     if request.method == 'POST':

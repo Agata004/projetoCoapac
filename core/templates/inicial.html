@@ -31,7 +31,7 @@
                         <th>Vínculo</th>
                         <th>Turma ou disciplina</th>
                         <th>Entregue</th>
-                        <th></th>
+                        <th>Editar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,6 +46,7 @@
                         <td>{{ emprestimo.comunidadeEscolar.vinculo }}</td>
                         <td>{{ emprestimo.comunidadeEscolar.turmaouDisciplina }}</td>
                         <td>{% if emprestimo.entregue %}Sim{% else %}Não{% endif %}</td>
+                        <td><a href="{% url 'editar_emprestimo' %}" class="botao">Editar</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>

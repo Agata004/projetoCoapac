@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index, base, inicial, emprestimo, desconectar
+from .views import index, base, inicial, emprestimo, editar_emprestimo, desconectar
 from .views import usuariosCadastro, usuariosVisualizacao, usuarios_editar, usuarios_delete  
 from .views import itensCadastro, itensVisualizacao, itensEditar, itensDelete
 from .views import tipoItensEditar, tipoItensDelete, tipoItensVisualizacao, tipoItensCadastro
@@ -7,6 +7,7 @@ from .views import tipoItensEditar, tipoItensDelete, tipoItensVisualizacao, tipo
 urlpatterns = [
     path('base/', base, name='base'),
     path('emprestimo/', emprestimo, name='emprestimo'),
+    path('editar_emprestimo/', editar_emprestimo, name='editar_emprestimo'),
     path('', index, name='index'),
     path('inicial/', inicial, name='inicial'),
     path('tipoItensVisualizacao/', tipoItensVisualizacao, name='tipoItensVisualizacao'),

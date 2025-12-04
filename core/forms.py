@@ -74,3 +74,11 @@ class EmprestimoForm(forms.ModelForm):
                     "A data de entrega não pode ser anterior à data de saída."
                 )
         return cleaned_data
+    
+class EmprestimoDevolucaoForm(forms.ModelForm):
+    class Meta:
+        model = Emprestimo
+        fields = ['dataDevolucao', 'entregue']
+        widgets = {
+            'dataDevolucao': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+        }

@@ -1,5 +1,5 @@
 from .models import ComunidadeEscolar, Usuarios, TipoProduto, Produtos, Emprestimo
-from .forms import UsuariosForm, UsuariosEditForm, TipoProdutoForm, EmprestimoForm, ProdutosForm
+from .forms import UsuariosForm, UsuariosEditForm, TipoProdutoForm, EmprestimoForm, ProdutosForm, EmprestimoDevolucaoForm
 from django.db import IntegrityError, transaction
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -99,6 +99,10 @@ def emprestimo(request):
                     emprestimo.comunidadeEscolar = comunidade
                     emprestimo.save()
 
+                    # Marca o produto como indisponível
+                    produto.disponivel = False
+                    produto.save()
+
                 messages.success(request, 'Empréstimo cadastrado com sucesso!')
                 return redirect('inicial')
             except Exception as e:
@@ -113,9 +117,37 @@ def emprestimo(request):
     }
     return render(request, 'emprestimo.html', contexto)
 
-def editar_emprestimo(request):
-    # Placeholder para futura implementação de edição de empréstimos
-    return render(request, 'editar_emprestimo.html')
+def editar_emprestimo(request, idEmprestimo):
+    emprestimo = get_object_or_404(Emprestimo, idEmprestimo=idEmprestimo)
+
+    if emprestimo.dataDevolucao:
+        return redirect('inicial')
+
+    if request.method == 'POST':
+        form = EmprestimoDevolucaoForm(request.POST, instance=emprestimo)
+        if form.is_valid():
+            devolucao = form.cleaned_data.get('dataDevolucao')
+            if devolucao and devolucao < emprestimo.dataSaida:
+                form.add_error('dataDevolucao', 'A data de devolução não pode ser anterior à data de saída.')
+            else:
+                form.save()
+
+                # Marca o produto como disponível novamente
+                if devolucao and not emprestimo.produtos.disponivel:
+                    produto = emprestimo.produtos
+                    produto.disponivel = True
+                    produto.save()
+                
+                messages.success(request, 'Empréstimo atualizado com sucesso.')
+                return redirect('inicial')
+    else:
+        form = EmprestimoDevolucaoForm(instance=emprestimo)
+
+    contexto = {
+        'form': form,
+        'emprestimo': emprestimo
+    }
+    return render(request, 'editar_emprestimo.html', contexto)
 
 @login_required
 def inicial(request):

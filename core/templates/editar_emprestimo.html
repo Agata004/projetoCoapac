@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Entregar empréstimo{% endblock %}
+
+{% block inicial %}
+<a href="{% url 'usuariosVisualizacao' %}"><i class="fa-solid fa-house fa-lg" style="color: #ffffff; height: 80px;"></i></a>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4">
+        </div>
+        <div class="col-4">
+            <form style="margin-top: 5vh;" method="post">
+                {% csrf_token %}
+                <h2>Adicionar data de devolução</h2>
+
+                <div class="mb-3">
+                    <label for="id_dataDevolucao" class="form-label">Data de Devolução</label>
+                    <input type="date" name="dataDevolucao" id="id_dataDevolucao" class="form-control" value="{{ form.dataDevolucao.value|default:'' }}" required>
+                    {% if form.dataDevolucao.errors %}
+                        <div class="text-danger">
+                            {{ form.dataDevolucao.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            
+                <button type="submit" class="botao">Salvar</button>
+                <a href="{% url 'inicial' %}" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
+        <div class="col-4">
+        </div>
+    </div>
+</div>
+<style>
+    .container-fluid {
+        margin-top: 20px;
+    }
+
+    h2 {
+        margin: 20px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    form {
+        justify-content: center;
+        text-align: center;
+        padding: 20px;
+        border: #3f131e 2px solid;
+        border-radius: 10px;
+    }
+</style>
+{% endblock %}

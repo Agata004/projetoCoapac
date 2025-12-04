@@ -31,7 +31,7 @@
                         <th>Vínculo</th>
                         <th>Turma ou disciplina</th>
                         <th>Entregue</th>
-                        <th>Editar</th>
+                        <th>Devolver empréstimo</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,14 +39,22 @@
                     <tr>
                         <td>{{ emprestimo.produtos.nome }}</td>
                         <td>{{ emprestimo.dataSaida }}</td>
+                        {% if emprestimo.dataDevolucao %}
                         <td>{{ emprestimo.dataDevolucao }}</td>
+                        {% else %}
+                        <td>-</td>
+                        {% endif %}
                         <td>{{ emprestimo.usuarios.nome }}</td>
                         <td>{{ emprestimo.comunidadeEscolar.nome }}</td>
                         <td>{{ emprestimo.comunidadeEscolar.matricula }}</td>
                         <td>{{ emprestimo.comunidadeEscolar.vinculo }}</td>
                         <td>{{ emprestimo.comunidadeEscolar.turmaouDisciplina }}</td>
-                        <td>{% if emprestimo.entregue %}Sim{% else %}Não{% endif %}</td>
-                        <td><a href="{% url 'editar_emprestimo' %}" class="botao">Editar</a></td>
+                        <td>{% if emprestimo.dataDevolucao %}Sim{% else %}Não{% endif %}</td>
+                        {% if emprestimo.dataDevolucao %}
+                        <td><a href="{% url 'inicial' %}" class="botao">Já devolvido</a></td>
+                        {% else %}
+                        <td><a href="{% url 'editar_emprestimo' emprestimo.idEmprestimo %}" class="botao">Devolver</a></td>
+                        {% endif %}
                     </tr>
                     {% endfor %}
                 </tbody>

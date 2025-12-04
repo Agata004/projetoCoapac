@@ -35,6 +35,7 @@ def base(request):
 # Empréstimo
 @login_required
 def emprestimo(request):
+    
     if not request.user.is_authenticated:
         messages.error(request, "Você precisa estar logado para registrar empréstimos.")
         return redirect('index')
@@ -47,23 +48,27 @@ def emprestimo(request):
             matricula = request.POST.get('matricula', '').strip()
             vinculo = request.POST.get('vinculo', '').strip()
             turma = request.POST.get('turma_disciplina', '').strip()
-
+            
             # pega o produto selecionado
             produto = form.cleaned_data.get('produtos')
             if not produto:
+                
                 form.add_error('produtos', 'Selecione um produto válido.')
                 # volta ao template com erros
                 return render(request, 'emprestimo.html', {'form': form, 'usuario_logado': request.user})
             
+            '''
             if Emprestimo.objects.filter(produtos=produto, entregue=False).exists():
+                print("01")
                 form.add_error('produtos', 'Este produto já está emprestado e não foi devolvido.')
                 # volta ao template com erros
                 return render(request, 'emprestimo.html', {'form': form, 'usuario_logado': request.user})
-
+            '''
             # usa transação para evitar corrida que crie duplicatas da Comunidade
             try:
+                
                 with transaction.atomic():
-
+                    
                     # get_or_create por matrícula
                     if matricula:
                         comunidade, created = ComunidadeEscolar.objects.get_or_create(
@@ -98,10 +103,6 @@ def emprestimo(request):
                     emprestimo.usuarios = request.user
                     emprestimo.comunidadeEscolar = comunidade
                     emprestimo.save()
-
-                    # Marca o produto como indisponível
-                    produto.disponivel = False
-                    produto.save()
 
                 messages.success(request, 'Empréstimo cadastrado com sucesso!')
                 return redirect('inicial')

@@ -29,7 +29,6 @@ class Produtos(models.Model):
     marca = models.CharField('Marca', max_length=50, null=True, blank=True)
     devo_ou_nao = models.BooleanField('Devolutivo ou não', default=False)
     tipoProduto = models.ForeignKey(TipoProduto, on_delete=models.PROTECT)
-    disponivel = models.BooleanField(default=True)
     def __str__(self):
         return f"{self.nome} ({self.tipoProduto.nome})"
 

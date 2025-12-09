@@ -33,8 +33,8 @@
                         <td>{{ u.nome }}</td>
                         <td>{{ u.username }}</td>
                         <td>
-                            <a href="{% url 'usuariosEditar' u.credencial %}" class="btn btn-warning">Editar</a>
-                            <a href="{% url 'usuariosDelete' u.credencial %}" class="btn btn-danger">Excluir</a>
+                            <a href="{% url 'usuariosEditar' u.credencial %}" class="botao">Editar</a>
+                            <a href="{% url 'usuariosDelete' u.credencial %}" class="botao">Excluir</a>
                         </td>
                     </tr>
                     {% empty %}

@@ -132,12 +132,6 @@ def editar_emprestimo(request, idEmprestimo):
                 form.add_error('dataDevolucao', 'A data de devolução não pode ser anterior à data de saída.')
             else:
                 form.save()
-
-                # Marca o produto como disponível novamente
-                if devolucao and not emprestimo.produtos.disponivel:
-                    produto = emprestimo.produtos
-                    produto.disponivel = True
-                    produto.save()
                 
                 messages.success(request, 'Empréstimo atualizado com sucesso.')
                 return redirect('inicial')

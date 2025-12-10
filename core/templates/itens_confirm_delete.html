@@ -3,18 +3,27 @@
 {% block title %}Confirmar Exclusão{% endblock %}
 
 {% block inicial %}
-<a href="{% url 'itensVisualizacao' %}"><i class="fa-solid fa-house fa-lg" style="color: #ffffff; height: 80px;"></i></a>
+<a href="{% url 'itensVisualizacao' %}"><i class="fa-solid fa-house fa-lg"
+        style="color: #ffffff; height: 80px;"></i></a>
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <h2>Confirmar exclusão</h2>
-    <p>Tem certeza que deseja excluir o item <strong>{{ item.nome }}</strong>?</p>
-    
-    <form method="POST">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Confirmar</button>
-        <a href="{% url 'itensVisualizacao' %}">Cancelar</a>
-    </form>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-sm-4 col-md-4 col-lg-4"></div>
+        <div class="col-12 col-sm-4 col-md-4 col-lg-4" style="text-align: center; margin-top: 20px;">
+            <h2>Confirmar exclusão</h2>
+            <p>Tem certeza que deseja excluir o item <strong>{{ item.nome }}</strong>?</p>
+
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" class="botao" style="background-color: red;">Confirmar</button>
+                <button class="botao" style="background-color: white;">
+                    <a href="{% url 'itensVisualizacao' %}" style="text-decoration: none; color: black;">Cancelar</a>
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="col-12 col-sm-4 col-md-4 col-lg-4"></div>
 </div>
 {% endblock %}

@@ -42,7 +42,8 @@
                         <div class="col-6">
                             <div class="mb-3">
                                 <label for="usuario_nome" class="form-label">Responsável</label>
-                                <label for="">{{ usuario_logado.get_full_name|default:usuario_logado.nome }}</label>
+                                <input type="text" class="form-control" id="usuario_nome" name="usuario_nome"
+                                value="{{ usuario_logado.get_full_name|default:usuario_logado.nome }}" readonly>
                             </div>
                             <div class="mb-3">
                                 <label for="data_entrega" class="form-label">Data de entrega</label>

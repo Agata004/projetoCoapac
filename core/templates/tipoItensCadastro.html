@@ -42,7 +42,7 @@
                     <input type="text" class="form-control" id="codigo" name="codigo" value="{{ codigo|default:'' }}" {% if nome %} readonly {% endif %} required>
                 </div>
 
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="botao">
                     {% if nome %}Salvar Alterações{% else %}Cadastrar{% endif %}
                 </button>
             </form>
@@ -67,6 +67,12 @@
         padding: 20px;
         border: #3f131e 2px solid;
         border-radius: 10px;
+    }
+
+    input.form-control {
+        width: 75%;
+        padding: 8px 12px;
+        margin: auto;
     }
 </style>
 {% endblock %}

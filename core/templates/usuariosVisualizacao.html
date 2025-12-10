@@ -9,13 +9,12 @@
 {% block content %}
 <div class="container-fluid">
     <div class="row">
-        <div style="text-align: center;" class="col-12 col-sm-2 col-md-2 col-lg-1">
-            <div><a href="{% url 'usuariosCadastro' %}" class="botao">Cadastrar Usuário</a></div>
-            <div><a href="{% url 'tipoItensVisualizacao' %}" class="botao">Tipos de Itens</a></div>
-            <div><a href="{% url 'tipoItensCadastro' %}" class="botao">Cadastrar Tipo de Item</a></div>
-            <div><a href="{% url 'desconectar' %}" class="botao">Desconectar</a></div>
+        <div style="text-align: center;" class="col-12 col-sm-2 col-md-2 col-lg-2">
+            <div><a href="{% url 'usuariosCadastro' %}" style="width: 100%;" class="botao" lang="pt-br">Cadastrar Usuário</a></div>
+            <div><a href="{% url 'tipoItensVisualizacao' %}" style="width: 100%;" class="botao" lang="pt-br">Tipos de Itens</a></div>
+            <div><a href="{% url 'tipoItensCadastro' %}" style="width: 100%;" class="botao" lang="pt-br">Cadastrar Tipo de Item</a></div>
         </div>
-        <div style="padding: 0 30px; text-align: center;" class="col-12 col-sm-8 col-md-8 col-lg-10">
+        <div style="padding: 0 30px; text-align: center;" class="col-12 col-sm-8 col-md-8 col-lg-8">
             <h2>Lista de Usuários</h2>
             <table class="table table-striped">
                 <thead>
@@ -33,8 +32,8 @@
                         <td>{{ u.nome }}</td>
                         <td>{{ u.username }}</td>
                         <td>
-                            <a href="{% url 'usuariosEditar' u.credencial %}" class="botao">Editar</a>
-                            <a href="{% url 'usuariosDelete' u.credencial %}" class="botao">Excluir</a>
+                            <a href="{% url 'usuariosEditar' u.credencial %}" class="botao" style="background-color: rgb(255, 210, 47); color: black;">Editar</a>
+                            <a href="{% url 'usuariosDelete' u.credencial %}" class="botao" style="background-color: red;">Excluir</a>
                         </td>
                     </tr>
                     {% empty %}
@@ -43,8 +42,22 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-12 col-sm-2 col-md-2 col-lg-1">
+        <div class="col-12 col-sm-2 col-md-2 col-lg-2">
         </div>
     </div>
 </div>
+<style>
+    .botao{
+        padding: auto;
+        box-sizing: border-box;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        word-break: break-word;
+        hyphens: auto;
+    }
+    table {
+    table-layout: fixed;
+    width: 100%;
+}
+</style>
 {% endblock %}
